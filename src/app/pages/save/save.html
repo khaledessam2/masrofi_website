@@ -1,0 +1,245 @@
+<app-header />
+
+<main class="overflow-x-clip pt-16">
+  <!-- ============================ HERO ============================ -->
+  <section class="relative overflow-hidden bg-ink text-white">
+    <div class="pointer-events-none absolute left-8 top-24 hidden animate-float lg:block">
+      <app-star [size]="64" color="var(--color-sky)" stroke="#191919" />
+    </div>
+    <div class="pointer-events-none absolute right-12 top-16 hidden animate-twinkle lg:block">
+      <app-star [size]="52" color="var(--color-gold)" />
+    </div>
+    <div class="pointer-events-none absolute bottom-16 right-1/4 hidden animate-float [animation-delay:-2s] lg:block">
+      <app-star [size]="38" color="var(--color-pink)" stroke="#191919" />
+    </div>
+
+    <div class="container-x relative py-16 text-center lg:py-24">
+      <h1 reveal class="text-6xl font-black leading-[0.95] sm:text-7xl lg:text-8xl">
+        <span class="text-gold">Save</span>
+      </h1>
+      <p reveal [revealDelay]="120" class="mx-auto mt-6 max-w-xl text-lg text-white/80 sm:text-xl">
+        Help your child take charge of their own saving with the kids’ savings account
+        that pays them interest.
+      </p>
+      <a reveal [revealDelay]="220" routerLink="/pricing"
+         class="mt-8 inline-block rounded-full bg-gold px-9 py-4 font-bold text-ink transition-transform hover:-translate-y-0.5 hover:shadow-xl">
+        Get started
+      </a>
+    </div>
+    <div class="h-10 rounded-t-[2.5rem] bg-cream"></div>
+  </section>
+
+  <!-- ==================== SET IT, SAVE IT, SMASH IT ==================== -->
+  <section class="bg-cream py-16 lg:py-24">
+    <div class="container-x">
+      <div reveal class="grid items-center gap-8 rounded-[2.5rem] bg-white p-8 shadow-xl lg:grid-cols-2 lg:p-14">
+        <div>
+          <span class="w-fit rounded-full bg-green px-3 py-1 text-xs font-bold text-white">Savings goals</span>
+          <h2 class="mt-4 text-4xl font-black lg:text-5xl">Set it, save it, smash it</h2>
+          <p class="mt-5 max-w-md text-lg text-ink/70">
+            Masroofi savings goals help kids grow their money — and their money smarts.
+            Kids can set custom goals, transfer money automatically with autosave and
+            earn interest.*
+          </p>
+          <a routerLink="/pricing" class="mt-6 inline-block font-bold text-green hover:underline">Learn more ›</a>
+          <p class="mt-6 text-xs text-ink/45">*Plus &amp; Max plans only. Interest rate is variable. Additional T&amp;Cs apply.</p>
+        </div>
+
+        <!-- savings illustration -->
+        <div reveal revealFrom="right" class="relative mx-auto flex aspect-square w-full max-w-sm items-center justify-center">
+          <div class="absolute inset-8 rounded-full bg-pink/30"></div>
+          <div class="relative w-64 rounded-[2rem] border-[6px] border-ink bg-white p-5 shadow-2xl">
+            <p class="text-center text-xs font-semibold text-ink/60">Interest savings</p>
+            <div class="mx-auto mt-3 flex h-20 w-20 items-center justify-center rounded-full bg-sky/40">
+              <span class="text-3xl font-black text-green">%</span>
+            </div>
+            <p class="mt-4 text-center text-4xl font-black text-ink">2.63%</p>
+            <p class="text-center text-xs text-ink/55">AER (variable)</p>
+            <div class="mt-4 rounded-xl bg-cream p-3 text-center">
+              <p class="text-lg font-black">Total £82</p>
+              <p class="text-xs font-semibold text-green">Auto-save £2.50</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== BIG STAT ==================== -->
+  <section class="relative overflow-hidden bg-green py-20 text-white lg:py-28">
+    <div class="pointer-events-none absolute left-10 top-12 animate-twinkle"><app-star [size]="60" color="var(--color-pink)" stroke="#191919" /></div>
+    <div class="pointer-events-none absolute bottom-12 right-12 animate-float"><app-star [size]="80" color="var(--color-gold)" /></div>
+    <div class="container-x relative text-center">
+      <h2 reveal revealFrom="scale" class="mx-auto max-w-4xl text-4xl font-black leading-tight lg:text-7xl">
+        Masroofi kids &amp; parents have set <span class="text-gold">2.49 million</span> savings goals
+      </h2>
+      <p reveal [revealDelay]="120" class="mx-auto mt-6 max-w-xl text-sm text-white/70">
+        Based on all-time active member data since launch.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== THEY SAVE, YOU INVEST (JUNIOR ISA) ==================== -->
+  <section class="bg-cream py-16 lg:py-24">
+    <div class="container-x">
+      <div reveal class="grid items-center gap-8 rounded-[2.5rem] bg-white p-8 shadow-xl lg:grid-cols-2 lg:p-14">
+        <!-- illustration -->
+        <div reveal revealFrom="left" class="order-2 mx-auto w-full max-w-md lg:order-1">
+          <div class="relative flex aspect-square items-center justify-center rounded-full bg-sky/40">
+            <!-- side goal chips -->
+            <div class="absolute left-2 top-1/2 hidden -translate-y-1/2 rounded-2xl bg-white/80 px-4 py-3 text-center shadow sm:block">
+              <span class="text-2xl">🚗</span>
+              <p class="mt-1 text-xs font-bold">First car</p>
+            </div>
+            <div class="absolute right-2 top-1/2 hidden -translate-y-1/2 rounded-2xl bg-white/80 px-4 py-3 text-center shadow sm:block">
+              <span class="text-2xl">✈️</span>
+              <p class="mt-1 text-xs font-bold">Gap year</p>
+            </div>
+            <!-- main card -->
+            <div class="relative z-10 w-56 rounded-2xl border-2 border-ink bg-white p-5 shadow-xl">
+              <p class="text-sm font-semibold text-ink/60">Junior ISA</p>
+              <p class="text-3xl font-black">£1,543.20</p>
+              <svg viewBox="0 0 220 70" class="mt-3 w-full" aria-hidden="true">
+                <polyline fill="none" stroke="var(--color-green)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="4,62 40,52 75,56 110,36 150,42 185,20 216,6"/>
+                <circle cx="216" cy="6" r="5" fill="var(--color-green)"/>
+              </svg>
+              <div class="mt-3 flex justify-between gap-1 rounded-full bg-cream p-1 text-[11px] font-bold text-ink/60">
+                <span class="rounded-full px-2 py-1">1M</span>
+                <span class="rounded-full px-2 py-1">1Y</span>
+                <span class="rounded-full px-2 py-1">3Y</span>
+                <span class="rounded-full bg-white px-2 py-1 text-ink shadow">5Y</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-1 lg:order-2">
+          <h2 class="text-4xl font-black lg:text-5xl">They save, you invest with a Junior ISA</h2>
+          <p class="mt-5 max-w-md text-lg text-ink/70">
+            Every Masroofi plan includes a Junior Stocks &amp; Shares ISA — so while your
+            child grows their savings, you can grow a pot of money for when they turn 18.
+          </p>
+          <a routerLink="/pricing" class="mt-6 inline-block font-bold text-green hover:underline">Discover Junior ISA ›</a>
+          <p class="mt-6 text-xs text-ink/45">Capital at risk. The value of your investment can go down as well as up.</p>
+        </div>
+      </div>
+
+      <!-- two feature cards -->
+      <div class="mt-6 grid gap-6 md:grid-cols-2">
+        @for (f of features; track f.title; let i = $index) {
+          <div reveal [revealDelay]="i * 120" class="flex flex-col rounded-[2rem] bg-white p-8 text-center shadow-sm lg:p-10">
+            <h3 class="text-3xl font-black">{{ f.title }}</h3>
+            <p class="mx-auto mt-3 max-w-sm flex-1 text-ink/70">{{ f.body }}</p>
+            @if (f.note) { <p class="mt-3 text-xs text-ink/45">{{ f.note }}</p> }
+            <div class="mx-auto mt-6 flex items-center gap-3 rounded-2xl border-2 border-ink bg-cream px-5 py-4 shadow-md">
+              <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-sky/50 text-xl font-black text-green">%</span>
+              <div class="text-left">
+                <p class="text-xs font-semibold text-ink/55">{{ $index === 0 ? 'Interest savings' : 'Parent-paid interest' }}</p>
+                <p class="text-lg font-black">{{ $index === 0 ? '2.63% AER' : '15% interest' }}</p>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== POCKET MONEY DIARIES ==================== -->
+  <section class="bg-sky/30 py-16 lg:py-24">
+    <div class="container-x">
+      <div reveal class="grid items-center gap-8 rounded-[2.5rem] bg-white p-8 shadow-xl lg:grid-cols-2 lg:p-14">
+        <div reveal revealFrom="left" class="relative mx-auto flex aspect-square w-full max-w-sm items-center justify-center rounded-full bg-pink/30">
+          <div class="flex h-32 w-32 items-center justify-center rounded-full bg-gold">
+            <app-star [size]="64" color="var(--color-ink)" />
+          </div>
+          <div class="absolute -bottom-2 right-6 animate-twinkle"><app-star [size]="34" color="var(--color-green)" stroke="#191919" /></div>
+        </div>
+        <div>
+          <h2 class="text-4xl font-black lg:text-5xl">Pocket money diaries: Ellie</h2>
+          <p class="mt-5 max-w-md text-lg text-ink/70">
+            Masroofi member Ellie is using her app to save for the future. Her biggest
+            saving tips? Using autosave, and tracking her spending in her Masroofi app.
+          </p>
+          <a routerLink="/pricing" class="mt-6 inline-block font-bold text-green hover:underline">Ellie’s money story ›</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TESTIMONIAL ==================== -->
+  <section class="relative overflow-hidden bg-ink py-20 text-white lg:py-28">
+    <div class="pointer-events-none absolute right-14 top-14 animate-float"><app-star [size]="56" color="var(--color-gold)" /></div>
+    <div class="pointer-events-none absolute bottom-16 left-14 animate-twinkle"><app-star [size]="44" color="var(--color-pink)" stroke="#191919" /></div>
+    <div class="container-x relative text-center">
+      <blockquote reveal revealFrom="scale" class="mx-auto max-w-4xl text-3xl font-black leading-tight lg:text-6xl">
+        “Perfect for teaching my daughter how to manage and, more importantly, how to save her money.”
+      </blockquote>
+      <div reveal [revealDelay]="120" class="mt-8">
+        <p class="text-sm font-semibold text-white/60">Chris F. — verified member</p>
+        <div class="mt-3 flex items-center justify-center gap-1">
+          @for (s of [1,2,3,4,5]; track s) { <app-star [size]="24" color="var(--color-green)" /> }
+        </div>
+        <p class="mt-2 text-sm text-white/50">Rated excellent by families like yours</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FAQ ==================== -->
+  <section class="bg-cream py-16 lg:py-24">
+    <div class="container-x">
+      <h2 reveal class="text-center text-4xl font-black lg:text-6xl">Frequently asked questions</h2>
+      <div reveal [revealDelay]="120" class="mt-12">
+        <app-faq [items]="faqs" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== WANT MORE SAVING INSIGHTS ==================== -->
+  <section class="bg-sky/20 py-16 lg:py-24">
+    <div class="container-x">
+      <div reveal class="mx-auto max-w-2xl text-center">
+        <h2 class="text-4xl font-black lg:text-6xl">Want more saving insights?</h2>
+        <p class="mt-4 text-lg text-ink/70">You’ll find them on the Masroofi blog.</p>
+      </div>
+
+      <div class="mt-12 grid gap-6 lg:grid-cols-3">
+        @for (b of blogCards; track b.title; let i = $index) {
+          <a reveal [revealDelay]="i * 120" routerLink="/" class="group flex flex-col overflow-hidden rounded-[2rem] bg-white shadow-sm transition-transform hover:-translate-y-1">
+            <div class="flex aspect-[16/10] items-center justify-center" [style.background]="accentVar(b.accent)">
+              <app-star [size]="72" color="var(--color-ink)" />
+            </div>
+            <div class="p-6">
+              <span class="text-xs font-bold uppercase tracking-wide text-green">{{ b.tag }}</span>
+              <h3 class="mt-2 text-xl font-black group-hover:text-green">{{ b.title }}</h3>
+              <p class="mt-2 text-sm text-ink/50">{{ b.read }}</p>
+            </div>
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NEWSLETTER ==================== -->
+  <section class="bg-cream py-16 lg:py-24">
+    <div class="container-x">
+      <div reveal revealFrom="scale" class="mx-auto max-w-4xl rounded-[2.5rem] bg-ink p-8 text-center text-white lg:p-14">
+        <h2 class="text-4xl font-black lg:text-5xl">Stay in the know</h2>
+        <p class="mx-auto mt-4 max-w-xl text-white/75">
+          Get a fresh slice of money news, and the latest Masroofi updates, straight to your inbox.
+        </p>
+        <form class="mx-auto mt-8 flex max-w-2xl flex-col gap-3 sm:flex-row" (submit)="$event.preventDefault()">
+          <input type="text" placeholder="First name" aria-label="First name"
+                 class="flex-1 rounded-full bg-white px-6 py-4 text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-gold" />
+          <input type="email" placeholder="Email" aria-label="Email"
+                 class="flex-1 rounded-full bg-white px-6 py-4 text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-gold" />
+          <button type="submit" class="rounded-full bg-gold px-8 py-4 font-bold text-ink transition-transform hover:-translate-y-0.5">
+            Sign me up
+          </button>
+        </form>
+        <p class="mt-4 text-xs text-white/45">Read our privacy policy. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<app-footer />

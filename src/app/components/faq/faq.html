@@ -1,0 +1,25 @@
+<div class="mx-auto max-w-3xl divide-y divide-ink/10 rounded-3xl border border-ink/10 bg-white">
+  @for (item of items; track item.q; let i = $index) {
+    <div>
+      <button
+        type="button"
+        class="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+        (click)="toggle(i)"
+        [attr.aria-expanded]="open() === i"
+      >
+        <span class="text-base font-bold text-ink sm:text-lg">{{ item.q }}</span>
+        <span
+          class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold transition-transform duration-300"
+          [class.rotate-45]="open() === i"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#191919" stroke-width="2.5" stroke-linecap="round">
+            <line x1="8" y1="2" x2="8" y2="14" /><line x1="2" y1="8" x2="14" y2="8" />
+          </svg>
+        </span>
+      </button>
+      @if (open() === i) {
+        <div class="px-6 pb-6 -mt-1 text-ink/70 leading-relaxed">{{ item.a }}</div>
+      }
+    </div>
+  }
+</div>

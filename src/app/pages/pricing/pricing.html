@@ -1,0 +1,312 @@
+<app-header />
+
+<main class="pt-16">
+  <!-- ============================ HERO ============================ -->
+  <section class="relative overflow-hidden bg-ink text-white">
+    <!-- decorative brand shapes -->
+    <div class="pointer-events-none absolute left-6 top-40 hidden animate-float opacity-90 lg:block">
+      <app-star [size]="70" color="var(--color-pink)" stroke="#191919" />
+    </div>
+    <div class="pointer-events-none absolute right-10 top-28 hidden animate-spin-slow opacity-90 lg:block">
+      <app-logo [size]="90" [wordmark]="false" />
+    </div>
+    <div class="pointer-events-none absolute bottom-10 right-1/3 hidden animate-twinkle lg:block">
+      <app-star [size]="40" color="var(--color-green)" stroke="#191919" />
+    </div>
+
+    <div class="container-x relative py-16 text-center lg:py-24">
+      <h1 class="mx-auto max-w-3xl text-5xl font-black leading-[0.95] sm:text-6xl lg:text-7xl">
+        Choose your <span class="text-gold">perfect plan</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-xl text-lg text-white/80 sm:text-xl">
+        Kids learn and grow their money while parents support and guide — all in one place.
+      </p>
+
+      <!-- floating cards -->
+      <div class="relative mx-auto mt-12 flex max-w-2xl items-center justify-center gap-4">
+        <div class="w-40 rotate-[-8deg] animate-float [animation-delay:-1s] sm:w-52">
+          <app-card-visual color="green" />
+        </div>
+        <div class="z-10 w-44 animate-float sm:w-56">
+          <app-card-visual color="ink" />
+        </div>
+        <div class="w-40 rotate-[8deg] animate-float [animation-delay:-2s] sm:w-52">
+          <app-card-visual color="red" />
+        </div>
+      </div>
+    </div>
+    <div class="h-10 rounded-t-[2.5rem] bg-cream"></div>
+  </section>
+
+  <!-- ============================ PLANS & PRICING ============================ -->
+  <section class="bg-cream pb-8">
+    <div class="container-x">
+      <div reveal class="mx-auto max-w-2xl text-center">
+        <h2 class="text-4xl font-black lg:text-5xl">Plans &amp; pricing</h2>
+        <p class="mt-4 text-lg text-ink/70">
+          Join over 2 million kids who have already built real money skills with Masroofi.
+        </p>
+        <p class="mt-2 text-sm text-ink/45">Based on all-time active child members since launch.</p>
+      </div>
+
+      <!-- Plan cards -->
+      <div class="mt-12 grid items-start gap-6 lg:grid-cols-3">
+        @for (plan of plans; track plan.key; let i = $index) {
+          <div
+            reveal [revealDelay]="i * 120"
+            class="relative flex flex-col rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-ink/10 sm:p-8"
+            [class.ring-2]="plan.popular"
+            [class.ring-ink]="plan.popular"
+          >
+            <!-- header row -->
+            <div class="flex items-start justify-between gap-3">
+              <h3 class="text-3xl font-black">{{ plan.name }}</h3>
+              <span
+                class="rounded-full px-3 py-1 text-xs font-bold text-ink"
+                [style.background]="badgeVar(plan.badgeAccent)"
+                [class.text-white]="plan.badgeAccent === 'green' || plan.badgeAccent === 'red'"
+              >{{ plan.badge }}</span>
+            </div>
+
+            <div class="mt-4 text-xl font-bold">
+              {{ plan.price }} <span class="text-base font-medium text-ink/60">{{ plan.unit }}</span>
+            </div>
+            <p class="mt-2 text-sm font-bold text-green">One month free</p>
+            <p class="mt-3 min-h-[44px] text-sm text-ink/70">{{ plan.desc }}</p>
+
+            <!-- feature groups -->
+            <div class="mt-5 space-y-4">
+              @for (group of featureGroups; track group.title) {
+                <div class="rounded-2xl bg-cream/70 p-5">
+                  <h4 class="font-bold">{{ group.title }}</h4>
+                  <ul class="mt-3 space-y-2.5">
+                    @for (row of group.rows; track row.label) {
+                      @let cell = row[plan.key];
+                      @if (cell !== null) {
+                        <li class="flex items-start gap-2.5 text-sm">
+                          @if (cell === false) {
+                            <svg class="mt-0.5 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-red)" stroke-width="3" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+                            <span class="text-ink/40 line-through">{{ row.label }}</span>
+                          } @else {
+                            <svg class="mt-0.5 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                            <span class="text-ink/80">{{ cell === true ? row.label : cell }}</span>
+                          }
+                        </li>
+                      }
+                    }
+                  </ul>
+                </div>
+              }
+            </div>
+
+            <a
+              routerLink="/pricing"
+              class="mt-6 block rounded-full py-3.5 text-center text-base font-bold transition-transform hover:-translate-y-0.5"
+              [class.bg-gold]="plan.popular"
+              [class.text-ink]="plan.popular"
+              [class.bg-ink]="!plan.popular"
+              [class.text-white]="!plan.popular"
+            >Get started</a>
+          </div>
+        }
+      </div>
+
+      <!-- disclaimer + CTA -->
+      <div reveal class="mx-auto mt-12 max-w-2xl text-center">
+        <p class="text-sm text-ink/55">
+          Capital at risk. The value of your child’s investments can go down as well as up.
+          Interest rates are variable and additional terms apply.
+        </p>
+        <p class="mt-6 text-xl font-black">One month FREE, cancel anytime.</p>
+        <a routerLink="/pricing" class="mt-6 inline-block rounded-full bg-ink px-10 py-4 font-bold text-gold transition-transform hover:-translate-y-0.5">
+          See all benefits
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ WHY CHOOSE ============================ -->
+  <section class="bg-green py-16 text-white lg:py-24">
+    <div class="container-x">
+      <div reveal class="mx-auto max-w-3xl text-center">
+        <h2 class="text-4xl font-black lg:text-6xl">Why choose Masroofi?</h2>
+        <p class="mx-auto mt-6 max-w-2xl text-lg text-white/85">
+          Masroofi is the money app and debit card built by parents, for kids. From just
+          £3.99 a month, children get a head start in life while parents get the tools to
+          support and guide.
+        </p>
+        <p class="mt-6 font-semibold text-gold">See how Masroofi compares to other kids’ accounts:</p>
+      </div>
+
+      <!-- comparison table -->
+      <div reveal revealFrom="scale" class="mt-12 overflow-x-auto">
+        <table class="w-full min-w-[900px] border-collapse text-left">
+          <thead>
+            <tr>
+              <th class="w-56 p-4"></th>
+              <th class="p-4 text-center">
+                <span class="inline-flex items-center justify-center rounded-t-2xl bg-white px-6 py-3">
+                  <app-logo [size]="26" wordColor="ink" />
+                </span>
+              </th>
+              @for (c of competitors; track c) {
+                <th class="p-4 text-center align-bottom text-sm font-bold text-white/90">{{ c }}</th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of compareRows; track row.label) {
+              <tr class="odd:bg-white/5">
+                <td class="p-4 align-middle text-sm font-medium text-white">
+                  {{ row.label }}
+                  @if (row.note) { <span class="block text-xs font-normal text-white/60">{{ row.note }}</span> }
+                </td>
+                <!-- Masroofi highlighted column -->
+                <td class="bg-white p-4 text-center align-middle"
+                    [class.rounded-b-2xl]="$last">
+                  @if (row.masroofi === true) {
+                    <span class="mx-auto flex h-7 w-7 items-center justify-center rounded-full bg-green">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                    </span>
+                  } @else {
+                    <span class="text-sm font-bold text-ink">{{ row.masroofi }}</span>
+                  }
+                </td>
+                @for (val of row.others; track $index) {
+                  <td class="p-4 text-center align-middle">
+                    @if (val === true) {
+                      <svg class="mx-auto" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                    } @else if (val === false) {
+                      <svg class="mx-auto opacity-40" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+                    } @else {
+                      <span class="text-sm font-semibold text-white">{{ val }}</span>
+                    }
+                  </td>
+                }
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-6 text-center text-sm text-white/60">Comparison based on publicly available information. Correct at time of writing.</p>
+    </div>
+  </section>
+
+  <!-- ============================ INVEST ============================ -->
+  <section class="relative overflow-hidden bg-ink py-16 text-white lg:py-24">
+    <div reveal class="container-x text-center">
+      <h2 class="text-4xl font-black lg:text-6xl">Invest in your child’s future</h2>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-white/80">
+        Grow a pot of money for when your child turns 18 with a Masroofi junior investing
+        account. It’s included in every plan — just activate it in your parent app.
+      </p>
+      <p class="mx-auto mt-4 max-w-xl text-sm text-white/50">
+        Capital at risk. The value of your investment can go down as well as up.
+      </p>
+      <a routerLink="/pricing" class="mt-8 inline-block rounded-full bg-gold px-8 py-4 font-bold text-ink transition-transform hover:-translate-y-0.5">
+        Discover investing
+      </a>
+
+      <!-- illustrative cards -->
+      <div class="mx-auto mt-14 flex max-w-3xl items-end justify-center gap-4">
+        <div class="hidden w-40 rounded-3xl bg-white p-5 text-left text-ink shadow-xl sm:block">
+          <div class="flex h-16 items-center justify-center rounded-xl bg-sky/60">
+            <app-star [size]="34" color="var(--color-green)" stroke="#191919" />
+          </div>
+          <p class="mt-3 text-xs font-semibold text-ink/60">18th birthday goal</p>
+          <p class="text-lg font-black">Uni fund</p>
+        </div>
+
+        <div class="w-64 rounded-3xl bg-white p-6 text-left text-ink shadow-2xl">
+          <p class="text-sm font-semibold text-ink/60">Junior investing</p>
+          <p class="text-3xl font-black">£1,543.20</p>
+          <svg viewBox="0 0 240 90" class="mt-3 w-full" aria-hidden="true">
+            <polyline
+              fill="none" stroke="var(--color-green)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
+              points="4,80 30,70 55,74 80,58 105,62 130,44 155,50 180,30 205,34 236,10"
+            />
+            <circle cx="236" cy="10" r="6" fill="var(--color-green)" />
+          </svg>
+          <div class="mt-3 flex justify-between gap-1 rounded-full bg-cream p-1 text-[11px] font-bold text-ink/60">
+            <span class="rounded-full px-2 py-1">1M</span>
+            <span class="rounded-full px-2 py-1">1Y</span>
+            <span class="rounded-full px-2 py-1">3Y</span>
+            <span class="rounded-full bg-white px-2 py-1 text-ink shadow">5Y</span>
+          </div>
+        </div>
+
+        <div class="hidden w-40 rounded-3xl bg-white p-5 text-left text-ink shadow-xl sm:block">
+          <div class="flex h-16 items-center justify-center rounded-xl bg-pink/60">
+            <app-star [size]="34" color="var(--color-red)" stroke="#191919" />
+          </div>
+          <p class="mt-3 text-xs font-semibold text-ink/60">18th birthday goal</p>
+          <p class="text-lg font-black">First car</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ FAQ ============================ -->
+  <section class="bg-cream py-16 lg:py-24">
+    <div class="container-x">
+      <h2 reveal class="text-center text-4xl font-black lg:text-6xl">
+        Got questions?<br />We have answers
+      </h2>
+      <div reveal [revealDelay]="120" class="mt-12">
+        <app-faq [items]="faqs" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ TESTIMONIALS ============================ -->
+  <section class="bg-ink py-16 text-white lg:py-24">
+    <div class="container-x">
+      <div class="grid items-center gap-10 lg:grid-cols-[1fr_1.6fr]">
+        <div reveal revealFrom="left">
+          <h2 class="text-4xl font-black lg:text-5xl">Don’t just take our word for it</h2>
+          <p class="mt-4 text-white/75">See why 9 in 10 parents would recommend Masroofi to a friend.</p>
+          <div class="mt-6 flex items-center gap-2">
+            @for (s of [1,2,3,4,5]; track s) {
+              <app-star [size]="22" color="var(--color-gold)" />
+            }
+            <span class="ml-2 text-sm font-semibold text-white/80">Rated excellent</span>
+          </div>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          @for (t of testimonials; track t.quote; let i = $index) {
+            <figure reveal [revealDelay]="i * 90" class="rounded-2xl bg-white p-6 text-ink">
+              <div class="flex gap-1">
+                @for (s of [1,2,3,4,5]; track s) {
+                  <app-star [size]="15" color="var(--color-green)" />
+                }
+              </div>
+              <blockquote class="mt-3 text-sm font-medium leading-relaxed">“{{ t.quote }}”</blockquote>
+            </figure>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NEWSLETTER ==================== -->
+  <section class="bg-cream">
+    <div reveal class="container-x py-16 text-center">
+      <h2 class="text-4xl font-black">Want to read more?</h2>
+      <p class="mx-auto mt-3 max-w-lg text-ink/65">
+        Get a fresh slice of money news and the latest Masroofi updates, straight to your inbox.
+      </p>
+      <form class="mx-auto mt-8 flex max-w-3xl flex-col gap-3 sm:flex-row" (submit)="$event.preventDefault()">
+        <input type="text" placeholder="First name" aria-label="First name"
+          class="flex-1 rounded-full border border-ink/15 bg-white px-6 py-4 text-ink outline-none focus:border-ink" />
+        <input type="email" placeholder="Email" aria-label="Email"
+          class="flex-1 rounded-full border border-ink/15 bg-white px-6 py-4 text-ink outline-none focus:border-ink" />
+        <button type="submit" class="rounded-full bg-ink px-8 py-4 font-bold text-gold transition-transform hover:-translate-y-0.5">
+          Sign me up
+        </button>
+      </form>
+      <p class="mt-3 text-xs text-ink/50">Read our <a href="#" class="font-semibold underline">privacy policy</a></p>
+    </div>
+  </section>
+</main>
+
+<app-footer />

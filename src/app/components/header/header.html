@@ -1,0 +1,80 @@
+<header
+  class="fixed inset-x-0 top-0 z-50 bg-ink transition-all duration-300"
+  [class.shadow-lg]="scrolled()"
+  [class.py-2]="scrolled()"
+  [class.py-4]="!scrolled()"
+>
+  <nav class="container-x flex items-center justify-between gap-4">
+    <a routerLink="/" class="flex items-center" aria-label="Masroofi home">
+      <app-logo [size]="40" wordColor="gold" />
+    </a>
+
+    <!-- Desktop nav -->
+    <ul class="hidden items-center gap-8 lg:flex">
+      @for (link of links; track link.label) {
+        <li>
+          <a
+            [routerLink]="link.path"
+            [fragment]="link.fragment"
+            routerLinkActive="text-gold after:scale-x-100"
+            class="relative text-sm font-medium text-white/85 transition-colors hover:text-gold after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:rounded-full after:bg-gold after:transition-transform after:duration-300"
+          >{{ link.label }}</a>
+        </li>
+      }
+    </ul>
+
+    <div class="hidden items-center gap-3 lg:flex">
+      <a href="#login" class="text-sm font-semibold text-white transition-colors hover:text-gold">
+        Log in
+      </a>
+      <a
+        routerLink="/pricing"
+        class="rounded-full bg-gold px-6 py-2.5 text-sm font-bold text-ink transition-transform hover:-translate-y-0.5 hover:shadow-lg"
+      >
+        Get started
+      </a>
+    </div>
+
+    <!-- Mobile toggle -->
+    <button
+      type="button"
+      class="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white lg:hidden"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="menuOpen()"
+      aria-label="Toggle menu"
+    >
+      @if (!menuOpen()) {
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <line x1="4" y1="7" x2="20" y2="7" /><line x1="4" y1="12" x2="20" y2="12" /><line x1="4" y1="17" x2="20" y2="17" />
+        </svg>
+      } @else {
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <line x1="6" y1="6" x2="18" y2="18" /><line x1="18" y1="6" x2="6" y2="18" />
+        </svg>
+      }
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  @if (menuOpen()) {
+    <div class="container-x lg:hidden">
+      <ul class="mt-4 flex flex-col gap-1 border-t border-white/10 pt-4">
+        @for (link of links; track link.label) {
+          <li>
+            <a
+              [routerLink]="link.path"
+              [fragment]="link.fragment"
+              routerLinkActive="bg-white/10 text-gold"
+              (click)="closeMenu()"
+              class="block rounded-xl border-l-4 border-transparent px-3 py-3 text-base font-medium text-white/90 hover:bg-white/10 [&.text-gold]:border-gold"
+            >{{ link.label }}</a>
+          </li>
+        }
+        <li class="mt-2 flex flex-col gap-3 px-1 pb-2">
+          <a href="#login" (click)="closeMenu()" class="rounded-full border border-white/25 px-6 py-3 text-center text-sm font-semibold text-white">Log in</a>
+          <a routerLink="/pricing" (click)="closeMenu()" class="rounded-full bg-gold px-6 py-3 text-center text-sm font-bold text-ink">Get started</a>
+        </li>
+      </ul>
+    </div>
+  }
+</header>

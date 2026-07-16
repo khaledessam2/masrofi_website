@@ -1,0 +1,298 @@
+<app-header />
+
+<main class="overflow-x-clip pt-16">
+  <!-- ============================ HERO ============================ -->
+  <section class="relative overflow-hidden bg-ink text-white">
+    <div class="pointer-events-none absolute left-10 top-1/3 hidden animate-float lg:block">
+      <app-star [size]="60" color="var(--color-gold)" />
+    </div>
+    <div class="pointer-events-none absolute right-12 top-24 hidden animate-twinkle lg:block">
+      <app-star [size]="48" color="var(--color-pink)" stroke="#191919" />
+    </div>
+
+    <div class="container-x relative py-16 text-center lg:py-20">
+      <h1 reveal class="text-6xl font-black leading-[0.95] sm:text-7xl lg:text-8xl">
+        <span class="text-gold">Learn</span>
+      </h1>
+      <p reveal [revealDelay]="120" class="mx-auto mt-6 max-w-xl text-lg text-white/80 sm:text-xl">
+        Kids don’t learn everything they need to know about money at school — that’s why
+        Masroofi helps them build essential money skills at home.
+      </p>
+
+      <!-- floating lesson badges -->
+      <div reveal [revealDelay]="220" class="mx-auto mt-12 flex max-w-3xl flex-wrap items-center justify-center gap-4">
+        @for (b of [{t:'Money basics',xp:'45 XP',c:'gold'},{t:'Intro to investing',xp:'20 XP',c:'green'},{t:'Budgeting & planning',xp:'30 XP',c:'red'}]; track b.t; let i = $index) {
+          <div reveal [revealDelay]="i * 110" class="w-40 rounded-2xl bg-white p-4 text-center text-ink shadow-xl">
+            <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-xl" [style.background]="accentVar(b.c)">
+              <app-star [size]="28" color="var(--color-ink)" />
+            </div>
+            <p class="mt-3 text-sm font-black">{{ b.t }}</p>
+            <span class="mt-1 inline-block rounded-full bg-gold px-2 py-0.5 text-[11px] font-bold text-ink">{{ b.xp }}</span>
+          </div>
+        }
+      </div>
+    </div>
+    <div class="h-10 rounded-t-[2.5rem] bg-sky/30"></div>
+  </section>
+
+  <!-- ==================== FINANCE LESSONS BY AGE (slider) ==================== -->
+  <section class="bg-sky/30 py-16 lg:py-24">
+    <div class="container-x">
+      <div reveal class="mx-auto max-w-3xl text-center">
+        <h2 class="text-4xl font-black lg:text-6xl">Finance lessons tailored to every age</h2>
+        <p class="mx-auto mt-5 max-w-2xl text-lg text-ink/70">
+          By seven, kids are already forming lifelong money habits. That’s why Masroofi
+          created Money Missions — real learning for every age, right now.
+        </p>
+      </div>
+
+      <!-- age-group slider -->
+      <div reveal class="relative mt-12">
+        <div class="overflow-hidden">
+          <div class="flex transition-transform duration-500 ease-out"
+               [style.transform]="'translateX(calc(-' + slide() * 100 + '% / 3))'">
+            @for (g of ageGroups; track g.range) {
+              <div class="w-full shrink-0 px-3 sm:w-1/2 lg:w-1/3">
+                <div class="h-full rounded-[2rem] bg-white p-7 shadow-sm">
+                  <div class="flex items-center justify-between">
+                    <h3 class="text-2xl font-black">{{ g.range }}</h3>
+                    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-gold">
+                      <app-star [size]="20" color="var(--color-ink)" />
+                    </span>
+                  </div>
+                  <ul class="mt-5 space-y-2.5">
+                    @for (t of g.topics; track t) {
+                      <li class="flex items-start gap-2.5 text-sm">
+                        <svg class="mt-0.5 shrink-0" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--color-green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                        <span class="text-ink/75">{{ t }}</span>
+                      </li>
+                    }
+                  </ul>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- controls -->
+      <div class="mt-8 flex items-center justify-center gap-4">
+        <a routerLink="/pricing" class="rounded-full bg-ink px-8 py-3.5 font-bold text-gold transition-transform hover:-translate-y-0.5">Read more</a>
+        <div class="flex gap-2">
+          <button type="button" (click)="prev()" [disabled]="slide() === 0" aria-label="Previous age groups"
+                  class="flex h-11 w-11 items-center justify-center rounded-full bg-white text-ink shadow ring-1 ring-ink/10 transition-opacity disabled:opacity-40">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <button type="button" (click)="next()" [disabled]="slide() === maxSlide()" aria-label="Next age groups"
+                  class="flex h-11 w-11 items-center justify-center rounded-full bg-white text-ink shadow ring-1 ring-ink/10 transition-opacity disabled:opacity-40">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+      <p class="mt-4 text-center text-xs text-ink/45">Aligned to a recognised financial education planning framework.</p>
+    </div>
+  </section>
+
+  <!-- ==================== MONEY MISSIONS INTRO ==================== -->
+  <section class="relative overflow-hidden bg-green py-20 text-white lg:py-24">
+    <div class="pointer-events-none absolute left-10 top-12 animate-twinkle"><app-star [size]="56" color="var(--color-pink)" stroke="#191919" /></div>
+    <div class="pointer-events-none absolute bottom-12 right-12 animate-float"><app-star [size]="76" color="var(--color-gold)" /></div>
+    <div class="container-x relative text-center">
+      <h2 reveal revealFrom="scale" class="mx-auto max-w-4xl text-4xl font-black leading-tight lg:text-6xl">
+        Money Missions: the ultimate parent hack for teaching money smarts
+      </h2>
+    </div>
+  </section>
+
+  <!-- ==================== FREE LESSONS ==================== -->
+  <section class="bg-cream py-16 lg:py-24">
+    <div class="container-x">
+      <div reveal class="grid items-center gap-8 rounded-[2.5rem] bg-white p-8 shadow-xl lg:grid-cols-2 lg:p-14">
+        <div>
+          <h2 class="text-4xl font-black lg:text-5xl">80+ free money lessons</h2>
+          <p class="mt-5 max-w-md text-lg text-ink/70">
+            Try before you buy with Money Missions! Kids can grow their money skills with
+            80+ free videos, then complete the gamified versions in-app after signing up.
+          </p>
+          <a routerLink="/pricing" class="mt-6 inline-block rounded-full bg-ink px-8 py-3.5 font-bold text-gold transition-transform hover:-translate-y-0.5">
+            Try for free
+          </a>
+        </div>
+
+        <!-- phone mock -->
+        <div reveal revealFrom="right" class="relative mx-auto w-64">
+          <div class="rounded-[2.2rem] border-[6px] border-ink bg-ink p-5 text-center text-white shadow-2xl">
+            <p class="text-lg font-bold">Why do people invest?</p>
+            <div class="mx-auto mt-6 flex h-28 w-28 items-center justify-center rounded-2xl bg-green">
+              <app-star [size]="56" color="var(--color-gold)" />
+            </div>
+            <div class="mt-6 rounded-full bg-gold py-2 text-sm font-bold text-ink">Start mission</div>
+          </div>
+          <span class="absolute -right-3 -top-3 flex h-14 w-14 items-center justify-center rounded-full bg-gold text-lg font-black text-ink shadow-lg">100</span>
+          <span class="absolute -bottom-2 left-6 rounded-full bg-red px-3 py-1 text-sm font-bold text-white shadow-lg">60 XP</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== LEVELS ==================== -->
+  <section class="bg-sky/20 py-16 lg:py-24">
+    <div class="container-x">
+      <div class="grid gap-6 lg:grid-cols-3">
+        @for (l of levels; track l.level; let i = $index) {
+          <div reveal [revealDelay]="i * 120" class="flex flex-col rounded-[2rem] bg-white p-8 text-center shadow-sm">
+            <span class="mx-auto w-fit rounded-full bg-ink px-3 py-1 text-xs font-bold text-gold">{{ l.ages }}</span>
+            <h3 class="mt-4 text-3xl font-black">{{ l.level }}</h3>
+            <p class="mt-1 font-bold text-green">{{ l.title }}</p>
+            <p class="mx-auto mt-3 max-w-sm flex-1 text-sm leading-relaxed text-ink/65">{{ l.body }}</p>
+            <div class="mx-auto mt-6 flex h-24 w-24 items-center justify-center rounded-2xl" [style.background]="accentVar(l.accent)">
+              <div class="flex h-16 w-16 items-center justify-center rounded-full bg-white text-lg font-black text-ink">{{ i + 1 }}</div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== BIG STAT ==================== -->
+  <section class="relative overflow-hidden bg-red py-20 text-white lg:py-24">
+    <div class="pointer-events-none absolute right-10 top-12 animate-float"><app-star [size]="70" color="var(--color-gold)" /></div>
+    <div class="pointer-events-none absolute bottom-12 left-12 animate-twinkle"><app-star [size]="54" color="#fff" /></div>
+    <div class="container-x relative text-center">
+      <h2 reveal revealFrom="scale" class="mx-auto max-w-4xl text-4xl font-black leading-tight lg:text-7xl">
+        Kids save an average of <span class="text-gold">50% more</span> after completing all the Level 1 Money Missions
+      </h2>
+      <p reveal [revealDelay]="120" class="mx-auto mt-6 max-w-xl text-sm text-white/70">
+        Based on Masroofi’s Money Missions impact study.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== IN-APP MISSIONS ==================== -->
+  <section class="bg-cream py-16 lg:py-24">
+    <div class="container-x space-y-6">
+      <!-- In-app missions -->
+      <div reveal class="grid items-center gap-8 rounded-[2.5rem] bg-white p-8 shadow-xl lg:grid-cols-2 lg:p-14">
+        <div>
+          <h2 class="text-4xl font-black lg:text-5xl">In-app missions. Real-world results.</h2>
+          <p class="mt-5 max-w-md text-lg text-ink/70">
+            Kids bring the skills they learn in Money Missions to life with their own app
+            and card. This safe, hands-on practice lets them enter adulthood confident and
+            prepared.
+          </p>
+          <a routerLink="/pricing" class="mt-6 inline-block font-bold text-green hover:underline">Learn more ›</a>
+        </div>
+        <div reveal revealFrom="right" class="relative mx-auto flex aspect-square w-full max-w-sm items-center justify-center rounded-full bg-pink/30">
+          <div class="w-52 rounded-[1.8rem] border-[6px] border-ink bg-white p-4 shadow-2xl">
+            <p class="text-xs font-semibold text-ink/60">All your money</p>
+            <p class="text-2xl font-black">£26.95</p>
+            <div class="mt-3 space-y-2">
+              <div class="flex justify-between rounded-lg bg-cream p-2 text-xs"><span class="font-semibold">On the card</span><span class="font-bold">£22.95</span></div>
+              <div class="flex justify-between rounded-lg bg-cream p-2 text-xs"><span class="font-semibold">In savings</span><span class="font-bold text-green">£4.00</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Parent space -->
+      <div reveal class="grid items-center gap-8 rounded-[2.5rem] bg-white p-8 shadow-xl lg:grid-cols-2 lg:p-14">
+        <div reveal revealFrom="left" class="order-2 mx-auto flex aspect-square w-full max-w-sm items-center justify-center rounded-full bg-sky/40 lg:order-1">
+          <div class="w-52 rounded-[1.8rem] border-[6px] border-ink bg-white p-4 shadow-2xl">
+            <p class="text-xs font-bold text-ink/50">Parent Space</p>
+            <div class="mt-2 rounded-xl bg-green/15 p-4 text-center">
+              <app-star [size]="34" color="var(--color-green)" />
+              <p class="mt-2 text-sm font-black">Growing money confidence</p>
+              <p class="text-xs text-ink/55">2 min read</p>
+            </div>
+          </div>
+        </div>
+        <div class="order-1 lg:order-2">
+          <h2 class="text-4xl font-black lg:text-5xl">Parents, this one’s for you</h2>
+          <p class="mt-5 max-w-md text-lg text-ink/70">
+            From tips to support your child’s learning, to updates on money lessons in
+            schools, the Masroofi Parent Space helps grown-ups grow their money skills too.
+          </p>
+          <a routerLink="/pricing" class="mt-6 inline-block font-bold text-green hover:underline">Explore Parent Space ›</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TESTIMONIAL ==================== -->
+  <section class="relative overflow-hidden bg-ink py-20 text-white lg:py-28">
+    <div class="pointer-events-none absolute right-14 top-14 animate-float"><app-star [size]="56" color="var(--color-gold)" /></div>
+    <div class="pointer-events-none absolute bottom-16 left-14 animate-twinkle"><app-star [size]="44" color="var(--color-pink)" stroke="#191919" /></div>
+    <div class="container-x relative text-center">
+      <blockquote reveal revealFrom="scale" class="mx-auto max-w-4xl text-3xl font-black leading-tight lg:text-5xl">
+        “Financial education is sorely lacking at school. I’ve been impressed with how Masroofi
+        encourages my 7-year-old twins to learn about money and make decisions.”
+      </blockquote>
+      <div reveal [revealDelay]="120" class="mt-8">
+        <p class="text-sm font-semibold text-white/60">Ed. — verified member</p>
+        <div class="mt-3 flex items-center justify-center gap-1">
+          @for (s of [1,2,3,4,5]; track s) { <app-star [size]="24" color="var(--color-green)" /> }
+        </div>
+        <p class="mt-2 text-sm text-white/50">Rated excellent by families like yours</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FAQ ==================== -->
+  <section class="bg-cream py-16 lg:py-24">
+    <div class="container-x">
+      <h2 reveal class="text-center text-4xl font-black lg:text-6xl">Questions? You’ll find the answers here</h2>
+      <div reveal [revealDelay]="120" class="mt-12">
+        <app-faq [items]="faqs" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== THE LEARNING NEVER STOPS ==================== -->
+  <section class="bg-sky/20 py-16 lg:py-24">
+    <div class="container-x">
+      <div reveal class="mx-auto max-w-2xl text-center">
+        <h2 class="text-4xl font-black lg:text-6xl">The learning never stops</h2>
+        <p class="mt-4 text-lg text-ink/70">Discover more ways to teach your child to earn, save, spend and invest.</p>
+      </div>
+
+      <div class="mt-12 grid gap-6 lg:grid-cols-3">
+        @for (b of blogCards; track b.title; let i = $index) {
+          <a reveal [revealDelay]="i * 120" routerLink="/" class="group flex flex-col overflow-hidden rounded-[2rem] bg-white shadow-sm transition-transform hover:-translate-y-1">
+            <div class="flex aspect-[16/10] items-center justify-center" [style.background]="accentVar(b.accent)">
+              <app-star [size]="72" color="var(--color-ink)" />
+            </div>
+            <div class="p-6">
+              <span class="text-xs font-bold uppercase tracking-wide text-green">{{ b.tag }}</span>
+              <h3 class="mt-2 text-xl font-black group-hover:text-green">{{ b.title }}</h3>
+              <p class="mt-2 text-sm text-ink/50">{{ b.read }}</p>
+            </div>
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NEWSLETTER ==================== -->
+  <section class="bg-cream py-16 lg:py-24">
+    <div class="container-x">
+      <div reveal revealFrom="scale" class="mx-auto max-w-4xl rounded-[2.5rem] bg-ink p-8 text-center text-white lg:p-14">
+        <h2 class="text-4xl font-black lg:text-5xl">Stay in the know</h2>
+        <p class="mx-auto mt-4 max-w-xl text-white/75">
+          Get a fresh slice of money news, and the latest Masroofi updates, straight to your inbox.
+        </p>
+        <form class="mx-auto mt-8 flex max-w-2xl flex-col gap-3 sm:flex-row" (submit)="$event.preventDefault()">
+          <input type="text" placeholder="First name" aria-label="First name"
+                 class="flex-1 rounded-full bg-white px-6 py-4 text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-gold" />
+          <input type="email" placeholder="Email" aria-label="Email"
+                 class="flex-1 rounded-full bg-white px-6 py-4 text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-gold" />
+          <button type="submit" class="rounded-full bg-gold px-8 py-4 font-bold text-ink transition-transform hover:-translate-y-0.5">
+            Sign me up
+          </button>
+        </form>
+        <p class="mt-4 text-xs text-white/45">Read our privacy policy. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<app-footer />

@@ -1,0 +1,41 @@
+<div
+  class="relative aspect-[1.585/1] w-full overflow-hidden rounded-2xl p-5 shadow-2xl ring-1 ring-black/10"
+  [style.background]="bg"
+  [style.color]="fg"
+>
+  <!-- big coin M watermark -->
+  <svg viewBox="0 0 200 200" class="pointer-events-none absolute -right-6 -bottom-8 h-[135%] opacity-90" aria-hidden="true">
+    <ellipse cx="100" cy="100" rx="86" ry="86" fill="none" [attr.stroke]="watermark" stroke-width="10" />
+    <ellipse cx="100" cy="100" rx="66" ry="66" fill="none" [attr.stroke]="watermark" stroke-width="4" opacity="0.7" />
+    <path d="M64 145 V60 h20 l16 42 16-42 h20 v85 h-18 V96 l-14 38 h-8 l-14-38 v49 z" [attr.fill]="watermark" />
+    <g [attr.stroke]="watermark" stroke-width="6" stroke-linecap="round" opacity="0.8">
+      <line x1="150" y1="70" x2="162" y2="82" /><line x1="158" y1="92" x2="170" y2="104" /><line x1="160" y1="114" x2="172" y2="126" />
+    </g>
+  </svg>
+
+  <div class="relative flex h-full flex-col justify-between">
+    <div class="flex items-start justify-between">
+      <app-logo [size]="26" [wordColor]="fg" />
+      <!-- contactless -->
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" [attr.stroke]="fg" stroke-width="2" stroke-linecap="round" class="opacity-90">
+        <path d="M8 8a6 6 0 0 1 0 8" /><path d="M11.5 5.5a10 10 0 0 1 0 13" /><path d="M15 3a14 14 0 0 1 0 18" />
+      </svg>
+    </div>
+
+    <div>
+      <span class="text-[11px] font-bold uppercase tracking-widest opacity-90">debit</span>
+      <div class="mt-1 flex items-center gap-3">
+        <!-- chip -->
+        <div class="h-6 w-8 rounded-[5px] bg-gradient-to-br from-yellow-200 to-yellow-500 ring-1 ring-black/20"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="font-mono text-[13px] tracking-[0.12em] sm:text-sm">1234 5678 1234 5678</div>
+      <div class="mt-2 flex items-end justify-between">
+        <span class="text-[11px] font-semibold uppercase tracking-widest">Nadine Kamal</span>
+        <span class="text-lg font-black italic tracking-tight">VISA</span>
+      </div>
+    </div>
+  </div>
+</div>
