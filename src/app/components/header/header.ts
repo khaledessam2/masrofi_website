@@ -1,13 +1,12 @@
 import { Component, signal, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { LogoComponent } from '../logo/logo';
 
 interface NavLink { label: string; path: string; fragment?: string; }
 
 @Component({
   selector: 'app-header',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [LogoComponent, RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './header.html',
 })
 export class HeaderComponent {

@@ -3,8 +3,8 @@ import { RouterLink } from '@angular/router';
 import { HeaderComponent } from '../../components/header/header';
 import { FooterComponent } from '../../components/footer/footer';
 import { StarComponent } from '../../components/star/star';
-import { LogoComponent } from '../../components/logo/logo';
 import { CardVisualComponent } from '../../components/card-visual/card-visual';
+import { TestimonialsComponent } from '../../components/testimonials/testimonials';
 import { FaqComponent, FaqItem } from '../../components/faq/faq';
 import { RevealDirective } from '../../directives/reveal.directive';
 
@@ -30,7 +30,7 @@ interface CompareRow { label: string; note?: string; masroofi: boolean | string;
 @Component({
   selector: 'app-pricing',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, HeaderComponent, FooterComponent, StarComponent, LogoComponent, CardVisualComponent, FaqComponent, RevealDirective],
+  imports: [RouterLink, HeaderComponent, FooterComponent, StarComponent, CardVisualComponent, TestimonialsComponent, FaqComponent, RevealDirective],
   templateUrl: './pricing.html',
 })
 export class PricingComponent {
@@ -121,13 +121,6 @@ export class PricingComponent {
     { label: 'Apple Pay (13+)', masroofi: true, others: [false, true, false, false, false, false, false] },
     { label: 'Custom cards', masroofi: true, others: [false, true, false, false, false, false, false] },
     { label: 'Age limits', masroofi: '6–18', others: ['6–17', '6–17', '6–16', '6–17', '11–15', '11–17', '11–17'] },
-  ];
-
-  testimonials = [
-    { quote: 'It has helped my daughter manage her money from an early age. She has learned how to save and how to spend responsibly — I recommend it to every parent.', color: 'pink' },
-    { quote: 'Brilliant service and so easy to use. My son loves having his own card, and topping him up takes seconds from my phone.', color: 'sky' },
-    { quote: 'A huge help in teaching my son about money and banking. The chores and rewards make it feel like a game to him.', color: 'gold' },
-    { quote: 'Great for giving kids a sense of financial independence, while parents keep a watchful eye on everything.', color: 'green' },
   ];
 
   faqs: FaqItem[] = [

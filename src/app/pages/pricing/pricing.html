@@ -8,7 +8,7 @@
       <app-star [size]="70" color="var(--color-pink)" stroke="#191919" />
     </div>
     <div class="pointer-events-none absolute right-10 top-28 hidden animate-spin-slow opacity-90 lg:block">
-      <app-logo [size]="90" [wordmark]="false" />
+      <img src="/logo-coin.png" alt="" aria-hidden="true" class="h-24 w-auto" />
     </div>
     <div class="pointer-events-none absolute bottom-10 right-1/3 hidden animate-twinkle lg:block">
       <app-star [size]="40" color="var(--color-green)" stroke="#191919" />
@@ -50,7 +50,7 @@
       </div>
 
       <!-- Plan cards -->
-      <div class="mt-12 grid items-start gap-6 lg:grid-cols-3">
+      <div class="mt-12 grid items-stretch gap-6 lg:grid-cols-3">
         @for (plan of plans; track plan.key; let i = $index) {
           <div
             reveal [revealDelay]="i * 120"
@@ -75,7 +75,7 @@
             <p class="mt-3 min-h-[44px] text-sm text-ink/70">{{ plan.desc }}</p>
 
             <!-- feature groups -->
-            <div class="mt-5 space-y-4">
+            <div class="mt-5 flex-1 space-y-4">
               @for (group of featureGroups; track group.title) {
                 <div class="rounded-2xl bg-cream/70 p-5">
                   <h4 class="font-bold">{{ group.title }}</h4>
@@ -146,7 +146,7 @@
               <th class="w-56 p-4"></th>
               <th class="p-4 text-center">
                 <span class="inline-flex items-center justify-center rounded-t-2xl bg-white px-6 py-3">
-                  <app-logo [size]="26" wordColor="ink" />
+                  <img src="/logo.png" alt="Masroofi" class="h-7 w-auto" />
                 </span>
               </th>
               @for (c of competitors; track c) {
@@ -203,7 +203,7 @@
       <p class="mx-auto mt-4 max-w-xl text-sm text-white/50">
         Capital at risk. The value of your investment can go down as well as up.
       </p>
-      <a routerLink="/pricing" class="mt-8 inline-block rounded-full bg-gold px-8 py-4 font-bold text-ink transition-transform hover:-translate-y-0.5">
+      <a routerLink="/invest" class="mt-8 inline-block rounded-full bg-gold px-8 py-4 font-bold text-ink transition-transform hover:-translate-y-0.5">
         Discover investing
       </a>
 
@@ -259,34 +259,7 @@
   </section>
 
   <!-- ============================ TESTIMONIALS ============================ -->
-  <section class="bg-ink py-16 text-white lg:py-24">
-    <div class="container-x">
-      <div class="grid items-center gap-10 lg:grid-cols-[1fr_1.6fr]">
-        <div reveal revealFrom="left">
-          <h2 class="text-4xl font-black lg:text-5xl">Don’t just take our word for it</h2>
-          <p class="mt-4 text-white/75">See why 9 in 10 parents would recommend Masroofi to a friend.</p>
-          <div class="mt-6 flex items-center gap-2">
-            @for (s of [1,2,3,4,5]; track s) {
-              <app-star [size]="22" color="var(--color-gold)" />
-            }
-            <span class="ml-2 text-sm font-semibold text-white/80">Rated excellent</span>
-          </div>
-        </div>
-        <div class="grid gap-4 sm:grid-cols-2">
-          @for (t of testimonials; track t.quote; let i = $index) {
-            <figure reveal [revealDelay]="i * 90" class="rounded-2xl bg-white p-6 text-ink">
-              <div class="flex gap-1">
-                @for (s of [1,2,3,4,5]; track s) {
-                  <app-star [size]="15" color="var(--color-green)" />
-                }
-              </div>
-              <blockquote class="mt-3 text-sm font-medium leading-relaxed">“{{ t.quote }}”</blockquote>
-            </figure>
-          }
-        </div>
-      </div>
-    </div>
-  </section>
+  <app-testimonials />
 
   <!-- ==================== NEWSLETTER ==================== -->
   <section class="bg-cream">

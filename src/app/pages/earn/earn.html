@@ -14,7 +14,7 @@
       <app-star [size]="38" color="var(--color-green)" stroke="#191919" />
     </div>
 
-    <div class="container-x relative py-16 text-center lg:py-24">
+    <div class="container-x relative pt-16 text-center lg:pt-24">
       <h1 reveal class="text-6xl font-black leading-[0.95] sm:text-7xl lg:text-8xl">
         <span class="text-gold">Earn</span>
       </h1>
@@ -22,18 +22,11 @@
         Teach your child the value of money as they learn to earn with pocket money,
         chores &amp; Money Missions.
       </p>
-      <a reveal [revealDelay]="220" routerLink="/pricing"
-         class="mt-8 inline-block rounded-full bg-gold px-9 py-4 font-bold text-ink transition-transform hover:-translate-y-0.5 hover:shadow-xl">
-        Get started
-      </a>
     </div>
-    <div class="h-10 rounded-t-[2.5rem] bg-cream"></div>
-  </section>
 
-  <!-- ==================== POCKET MONEY, MADE SMARTER ==================== -->
-  <section class="bg-cream py-16 lg:py-24">
-    <div class="container-x">
-      <div reveal class="grid items-center gap-8 rounded-[2.5rem] bg-white p-8 shadow-xl lg:grid-cols-2 lg:p-14">
+    <!-- ==================== POCKET MONEY, MADE SMARTER ==================== -->
+    <div class="container-x relative pb-16 pt-12 lg:pb-24 lg:pt-16">
+      <div reveal class="grid items-center gap-8 rounded-[2.5rem] bg-white p-8 text-ink shadow-2xl lg:grid-cols-2 lg:p-14">
         <div>
           <span class="w-fit rounded-full bg-green px-3 py-1 text-xs font-bold text-white">Pocket money</span>
           <h2 class="mt-4 text-4xl font-black lg:text-5xl">Pocket money, made smarter</h2>
@@ -44,22 +37,22 @@
           <a routerLink="/pricing" class="mt-6 inline-block font-bold text-green hover:underline">Learn more ›</a>
         </div>
 
-        <!-- allowance illustration -->
-        <div reveal revealFrom="right" class="relative mx-auto flex w-full max-w-sm items-center justify-center">
-          <div class="w-full rounded-[2rem] bg-sky/40 p-8">
-            <div class="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-gold">
-              <app-star [size]="44" color="var(--color-ink)" />
+        <!-- allowance photo -->
+        <div reveal revealFrom="right" class="relative mx-auto w-full max-w-md">
+          <img
+            src="/earn/Earn.png"
+            alt="Child earning pocket money with the Masroofi app"
+            class="w-full"
+          />
+          <!-- floating allowance badge -->
+          <div class="absolute bottom-2 left-1/2 flex w-[85%] -translate-x-1/2 items-center justify-between rounded-2xl border-2 border-ink bg-white p-4 shadow-xl">
+            <div class="flex items-center gap-3">
+              <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-green/15">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2Z"/><path d="M16 7V5a2 2 0 0 0-2-2H6"/><circle cx="16" cy="13" r="1"/></svg>
+              </span>
+              <span class="font-bold">Allowance</span>
             </div>
-            <p class="mt-6 text-center text-sm font-semibold text-ink/60">Weekly allowance</p>
-            <div class="mt-3 flex items-center justify-between rounded-2xl border-2 border-ink bg-white p-4 shadow-lg">
-              <div class="flex items-center gap-3">
-                <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-green/15">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2Z"/><path d="M16 7V5a2 2 0 0 0-2-2H6"/><circle cx="16" cy="13" r="1"/></svg>
-                </span>
-                <span class="font-bold">Allowance</span>
-              </div>
-              <span class="text-lg font-black text-green">+£10</span>
-            </div>
+            <span class="text-lg font-black text-green">+£10</span>
           </div>
         </div>
       </div>
@@ -248,6 +241,12 @@
       </div>
     </div>
   </section>
+
+  <!-- ==================== WANT TO READ MORE ==================== -->
+  <app-read-more
+    subtitle="Discover tips, tricks and earning insights on the Masroofi blog."
+    [cards]="blogCards"
+  />
 
   <!-- ==================== NEWSLETTER ==================== -->
   <section class="bg-cream py-16 lg:py-24">

@@ -4,6 +4,7 @@ import { HeaderComponent } from '../../components/header/header';
 import { FooterComponent } from '../../components/footer/footer';
 import { StarComponent } from '../../components/star/star';
 import { FaqComponent, FaqItem } from '../../components/faq/faq';
+import { ReadMoreComponent, BlogCard } from '../../components/read-more/read-more';
 import { RevealDirective } from '../../directives/reveal.directive';
 
 interface WhyCard { icon: 'spark' | 'wallet' | 'chart' | 'family' | 'shield'; title: string; body: string; }
@@ -12,7 +13,6 @@ interface Plan {
   name: string; badge: string; accent: 'green' | 'gold' | 'red';
   price: string; unit: string; popular?: boolean; benefits: string[];
 }
-interface BlogCard { tag: string; title: string; read: string; accent: string; }
 
 @Component({
   selector: 'app-invest',
@@ -23,6 +23,7 @@ interface BlogCard { tag: string; title: string; read: string; accent: string; }
     FooterComponent,
     StarComponent,
     FaqComponent,
+    ReadMoreComponent,
     RevealDirective,
   ],
   templateUrl: './invest.html',
@@ -100,9 +101,9 @@ export class InvestComponent {
   ];
 
   blogCards: BlogCard[] = [
-    { tag: 'Investing', title: 'Junior ISAs, explained for parents', read: '3 min. read', accent: 'sky' },
-    { tag: 'Guides', title: 'The power of pocket money', read: '2 min. read', accent: 'pink' },
-    { tag: 'Growth', title: 'Compound interest, explained simply', read: '4 min. read', accent: 'gold' },
+    { tag: 'Investing', title: 'Junior ISAs, explained for parents', read: '3 min. read', accent: 'sky', img: '/blog/blog-1.png' },
+    { tag: 'Guides', title: 'The power of pocket money', read: '2 min. read', accent: 'pink', img: '/blog/blog-2.png' },
+    { tag: 'Growth', title: 'Compound interest, explained simply', read: '4 min. read', accent: 'gold', img: '/blog/blog-3.png' },
   ];
 
   faqs: FaqItem[] = [

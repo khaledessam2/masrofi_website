@@ -4,6 +4,7 @@ import { HeaderComponent } from '../../components/header/header';
 import { FooterComponent } from '../../components/footer/footer';
 import { StarComponent } from '../../components/star/star';
 import { FaqComponent, FaqItem } from '../../components/faq/faq';
+import { ReadMoreComponent, BlogCard } from '../../components/read-more/read-more';
 import { RevealDirective } from '../../directives/reveal.directive';
 
 interface MiniCard { icon: 'missions' | 'gift' | 'teen'; title: string; body: string; }
@@ -18,6 +19,7 @@ interface Chore { label: string; amount: string; }
     FooterComponent,
     StarComponent,
     FaqComponent,
+    ReadMoreComponent,
     RevealDirective,
   ],
   templateUrl: './earn.html',
@@ -45,6 +47,12 @@ export class EarnComponent {
       title: 'Just for teens',
       body: 'Kids aged 13+ unlock extra benefits — get wages paid straight to their card and transfer money with friends, making splitting the bill easy.',
     },
+  ];
+
+  blogCards: BlogCard[] = [
+    { tag: 'Pocket money', title: 'Teaching kids to spend wisely', read: '2 min. read', accent: 'sky', img: '/blog/blog-1.png' },
+    { tag: 'Guides', title: 'The power of pocket money', read: '2 min. read', accent: 'pink', img: '/blog/blog-2.png' },
+    { tag: 'Chores', title: 'Turning chores into earnings', read: '4 min. read', accent: 'gold', img: '/blog/blog-3.png' },
   ];
 
   faqs: FaqItem[] = [

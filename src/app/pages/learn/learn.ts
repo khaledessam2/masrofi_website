@@ -4,11 +4,11 @@ import { HeaderComponent } from '../../components/header/header';
 import { FooterComponent } from '../../components/footer/footer';
 import { StarComponent } from '../../components/star/star';
 import { FaqComponent, FaqItem } from '../../components/faq/faq';
+import { ReadMoreComponent, BlogCard } from '../../components/read-more/read-more';
 import { RevealDirective } from '../../directives/reveal.directive';
 
 interface AgeGroup { range: string; topics: string[]; }
 interface Level { ages: string; level: string; title: string; body: string; accent: string; }
-interface BlogCard { tag: string; title: string; read: string; accent: string; }
 
 @Component({
   selector: 'app-learn',
@@ -19,6 +19,7 @@ interface BlogCard { tag: string; title: string; read: string; accent: string; }
     FooterComponent,
     StarComponent,
     FaqComponent,
+    ReadMoreComponent,
     RevealDirective,
   ],
   templateUrl: './learn.html',
@@ -47,9 +48,9 @@ export class LearnComponent {
   ];
 
   blogCards: BlogCard[] = [
-    { tag: 'Learning', title: 'Money lessons every kid should know', read: '3 min. read', accent: 'sky' },
-    { tag: 'Guides', title: 'The power of pocket money', read: '2 min. read', accent: 'pink' },
-    { tag: 'Teens', title: 'Summer jobs for kids and teens', read: '4 min. read', accent: 'gold' },
+    { tag: 'Learning', title: 'Money lessons every kid should know', read: '3 min. read', accent: 'sky', img: '/blog/blog-1.png' },
+    { tag: 'Guides', title: 'The power of pocket money', read: '2 min. read', accent: 'pink', img: '/blog/blog-2.png' },
+    { tag: 'Teens', title: 'Summer jobs for kids and teens', read: '4 min. read', accent: 'gold', img: '/blog/blog-3.png' },
   ];
 
   faqs: FaqItem[] = [

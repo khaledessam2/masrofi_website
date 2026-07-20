@@ -4,10 +4,10 @@ import { HeaderComponent } from '../../components/header/header';
 import { FooterComponent } from '../../components/footer/footer';
 import { StarComponent } from '../../components/star/star';
 import { FaqComponent, FaqItem } from '../../components/faq/faq';
+import { ReadMoreComponent, BlogCard } from '../../components/read-more/read-more';
 import { RevealDirective } from '../../directives/reveal.directive';
 
 interface Feature { title: string; body: string; note?: string; }
-interface BlogCard { tag: string; title: string; read: string; accent: string; }
 
 @Component({
   selector: 'app-save',
@@ -18,6 +18,7 @@ interface BlogCard { tag: string; title: string; read: string; accent: string; }
     FooterComponent,
     StarComponent,
     FaqComponent,
+    ReadMoreComponent,
     RevealDirective,
   ],
   templateUrl: './save.html',
@@ -36,9 +37,9 @@ export class SaveComponent {
   ];
 
   blogCards: BlogCard[] = [
-    { tag: 'Saving', title: 'Teaching kids the savings habit', read: '2 min. read', accent: 'sky' },
-    { tag: 'Guides', title: 'The power of pocket money', read: '2 min. read', accent: 'pink' },
-    { tag: 'Interest', title: 'Compound interest, explained simply', read: '4 min. read', accent: 'gold' },
+    { tag: 'Saving', title: 'Teaching kids the savings habit', read: '2 min. read', accent: 'sky', img: '/blog/blog-1.png' },
+    { tag: 'Guides', title: 'The power of pocket money', read: '2 min. read', accent: 'pink', img: '/blog/blog-2.png' },
+    { tag: 'Interest', title: 'Compound interest, explained simply', read: '4 min. read', accent: 'gold', img: '/blog/blog-3.png' },
   ];
 
   faqs: FaqItem[] = [
@@ -63,6 +64,4 @@ export class SaveComponent {
       a: 'Show them that the interest they earn also earns interest over time. With Masroofi they can watch it happen on real savings — the clearest way to make compound growth click.',
     },
   ];
-
-  accentVar(a: string): string { return `var(--color-${a})`; }
 }

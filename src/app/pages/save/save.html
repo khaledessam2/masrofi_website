@@ -13,7 +13,7 @@
       <app-star [size]="38" color="var(--color-pink)" stroke="#191919" />
     </div>
 
-    <div class="container-x relative py-16 text-center lg:py-24">
+    <div class="container-x relative pt-16 text-center lg:pt-24">
       <h1 reveal class="text-6xl font-black leading-[0.95] sm:text-7xl lg:text-8xl">
         <span class="text-gold">Save</span>
       </h1>
@@ -21,18 +21,11 @@
         Help your child take charge of their own saving with the kids’ savings account
         that pays them interest.
       </p>
-      <a reveal [revealDelay]="220" routerLink="/pricing"
-         class="mt-8 inline-block rounded-full bg-gold px-9 py-4 font-bold text-ink transition-transform hover:-translate-y-0.5 hover:shadow-xl">
-        Get started
-      </a>
     </div>
-    <div class="h-10 rounded-t-[2.5rem] bg-cream"></div>
-  </section>
 
-  <!-- ==================== SET IT, SAVE IT, SMASH IT ==================== -->
-  <section class="bg-cream py-16 lg:py-24">
-    <div class="container-x">
-      <div reveal class="grid items-center gap-8 rounded-[2.5rem] bg-white p-8 shadow-xl lg:grid-cols-2 lg:p-14">
+    <!-- ==================== SET IT, SAVE IT, SMASH IT ==================== -->
+    <div class="container-x relative pb-16 pt-12 lg:pb-24 lg:pt-16">
+      <div reveal class="grid items-center gap-8 rounded-[2.5rem] bg-white p-8 text-ink shadow-2xl lg:grid-cols-2 lg:p-14">
         <div>
           <span class="w-fit rounded-full bg-green px-3 py-1 text-xs font-bold text-white">Savings goals</span>
           <h2 class="mt-4 text-4xl font-black lg:text-5xl">Set it, save it, smash it</h2>
@@ -45,20 +38,20 @@
           <p class="mt-6 text-xs text-ink/45">*Plus &amp; Max plans only. Interest rate is variable. Additional T&amp;Cs apply.</p>
         </div>
 
-        <!-- savings illustration -->
-        <div reveal revealFrom="right" class="relative mx-auto flex aspect-square w-full max-w-sm items-center justify-center">
-          <div class="absolute inset-8 rounded-full bg-pink/30"></div>
-          <div class="relative w-64 rounded-[2rem] border-[6px] border-ink bg-white p-5 shadow-2xl">
-            <p class="text-center text-xs font-semibold text-ink/60">Interest savings</p>
-            <div class="mx-auto mt-3 flex h-20 w-20 items-center justify-center rounded-full bg-sky/40">
-              <span class="text-3xl font-black text-green">%</span>
+        <!-- savings photo -->
+        <div reveal revealFrom="right" class="relative mx-auto w-full max-w-md">
+          <img
+            src="/save/save.png"
+            alt="Child saving money with the Masroofi app"
+            class="w-full"
+          />
+          <!-- floating interest badge -->
+          <div class="absolute bottom-2 left-1/2 flex w-[85%] -translate-x-1/2 items-center justify-between rounded-2xl border-2 border-ink bg-white p-4 shadow-xl">
+            <div class="flex items-center gap-3">
+              <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-sky/40 text-lg font-black text-green">%</span>
+              <span class="font-bold">Interest savings</span>
             </div>
-            <p class="mt-4 text-center text-4xl font-black text-ink">2.63%</p>
-            <p class="text-center text-xs text-ink/55">AER (variable)</p>
-            <div class="mt-4 rounded-xl bg-cream p-3 text-center">
-              <p class="text-lg font-black">Total £82</p>
-              <p class="text-xs font-semibold text-green">Auto-save £2.50</p>
-            </div>
+            <span class="text-lg font-black text-green">2.63%</span>
           </div>
         </div>
       </div>
@@ -195,29 +188,11 @@
   </section>
 
   <!-- ==================== WANT MORE SAVING INSIGHTS ==================== -->
-  <section class="bg-sky/20 py-16 lg:py-24">
-    <div class="container-x">
-      <div reveal class="mx-auto max-w-2xl text-center">
-        <h2 class="text-4xl font-black lg:text-6xl">Want more saving insights?</h2>
-        <p class="mt-4 text-lg text-ink/70">You’ll find them on the Masroofi blog.</p>
-      </div>
-
-      <div class="mt-12 grid gap-6 lg:grid-cols-3">
-        @for (b of blogCards; track b.title; let i = $index) {
-          <a reveal [revealDelay]="i * 120" routerLink="/" class="group flex flex-col overflow-hidden rounded-[2rem] bg-white shadow-sm transition-transform hover:-translate-y-1">
-            <div class="flex aspect-[16/10] items-center justify-center" [style.background]="accentVar(b.accent)">
-              <app-star [size]="72" color="var(--color-ink)" />
-            </div>
-            <div class="p-6">
-              <span class="text-xs font-bold uppercase tracking-wide text-green">{{ b.tag }}</span>
-              <h3 class="mt-2 text-xl font-black group-hover:text-green">{{ b.title }}</h3>
-              <p class="mt-2 text-sm text-ink/50">{{ b.read }}</p>
-            </div>
-          </a>
-        }
-      </div>
-    </div>
-  </section>
+  <app-read-more
+    heading="Want more saving insights?"
+    subtitle="You’ll find them on the Masroofi blog."
+    [cards]="blogCards"
+  />
 
   <!-- ==================== NEWSLETTER ==================== -->
   <section class="bg-cream py-16 lg:py-24">

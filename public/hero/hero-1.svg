@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" width="900" height="900" fill="none">
+  <rect x="20" y="20" width="860" height="860" rx="48" fill="#fbd963" fill-opacity="0.08" stroke="#fbd963" stroke-width="4" stroke-dasharray="18 16"/>
+  <circle cx="450" cy="360" r="150" fill="#fbd963" fill-opacity="0.18"/>
+  <path d="M450 285l24 49 54 8-39 38 9 54-48-25-48 25 9-54-39-38 54-8z" fill="#fbd963"/>
+  <text x="450" y="560" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="52" font-weight="800" fill="#ffffff">Slide 1</text>
+  <text x="450" y="620" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#ffffff" fill-opacity="0.7">Learn &amp; grow money</text>
+  <text x="450" y="700" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="24" fill="#ffffff" fill-opacity="0.45">ضع صورتك هنا · 900×900</text>
+</svg>

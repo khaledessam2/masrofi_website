@@ -1,11 +1,9 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { LogoComponent } from '../logo/logo';
 
 /** A Masroofi Visa debit card, in the brand's three collateral colourways. */
 @Component({
   selector: 'app-card-visual',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [LogoComponent],
   templateUrl: './card-visual.html',
 })
 export class CardVisualComponent {

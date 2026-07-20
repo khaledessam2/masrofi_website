@@ -1,10 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { LogoComponent } from '../logo/logo';
 
 @Component({
   selector: 'app-footer',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [LogoComponent],
   templateUrl: './footer.html',
 })
 export class FooterComponent {

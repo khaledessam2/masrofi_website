@@ -1,10 +1,11 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { HeaderComponent } from '../../components/header/header';
 import { FooterComponent } from '../../components/footer/footer';
 import { StarComponent } from '../../components/star/star';
 import { CardVisualComponent } from '../../components/card-visual/card-visual';
 import { FaqComponent, FaqItem } from '../../components/faq/faq';
+import { ReadMoreComponent, BlogCard } from '../../components/read-more/read-more';
 import { RevealDirective } from '../../directives/reveal.directive';
 
 type CardColor = 'ink' | 'green' | 'red';
@@ -23,6 +24,7 @@ interface SafetyTool { icon: 'check' | 'key' | 'bell' | 'lock' | 'block' | 'card
     StarComponent,
     CardVisualComponent,
     FaqComponent,
+    ReadMoreComponent,
     RevealDirective,
   ],
   templateUrl: './spend.html',
@@ -37,8 +39,16 @@ export class SpendComponent {
     { color: 'red', name: 'Sunset' },
   ];
 
-  // ---- card slider ----
+  // ---- card slider (shows 3 at once, active centred) ----
   slide = signal(0);
+
+  // Offset (in units of one third of the viewport) that keeps the active
+  // card in the middle slot, clamped so the ends never show a blank slot.
+  trackOffset = computed(() => {
+    const n = this.cardDesigns.length;
+    const centre = Math.min(Math.max(this.slide(), 1), n - 2);
+    return (centre - 1) * (100 / 3);
+  });
 
   next() { this.slide.update((v) => (v + 1) % this.cardDesigns.length); }
   prev() { this.slide.update((v) => (v - 1 + this.cardDesigns.length) % this.cardDesigns.length); }
@@ -89,10 +99,10 @@ export class SpendComponent {
     { icon: 'card', label: 'Replace lost or stolen cards for free' },
   ];
 
-  blogCards = [
-    { tag: 'Spending', title: 'Teaching kids to spend wisely', read: '2 min. read', accent: 'sky' },
-    { tag: 'Guides', title: 'The power of pocket money', read: '2 min. read', accent: 'pink' },
-    { tag: 'Safety', title: 'Keeping your child’s card safe', read: '4 min. read', accent: 'gold' },
+  blogCards: BlogCard[] = [
+    { tag: 'Spending', title: 'Teaching kids to spend wisely', read: '2 min. read', accent: 'sky', img: '/blog/blog-1.png' },
+    { tag: 'Guides', title: 'The power of pocket money', read: '2 min. read', accent: 'pink', img: '/blog/blog-2.png' },
+    { tag: 'Safety', title: 'Keeping your child’s card safe', read: '4 min. read', accent: 'gold', img: '/blog/blog-3.png' },
   ];
 
   faqs: FaqItem[] = [
@@ -117,6 +127,4 @@ export class SpendComponent {
       a: 'Real-time notifications, spending insights and safety limits let your child spend within safe boundaries while you guide them — turning everyday purchases into money lessons.',
     },
   ];
-
-  accentVar(a: string): string { return `var(--color-${a})`; }
 }
