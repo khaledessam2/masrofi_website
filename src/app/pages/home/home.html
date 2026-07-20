@@ -12,11 +12,11 @@
       (mouseenter)="pauseAuto()"
       (mouseleave)="resumeAuto()"
     >
-      <!-- slides stacked; only the active one is interactive -->
-      <div class="relative min-h-[30rem] lg:min-h-[34rem]">
+      <!-- slides stacked in one grid cell; only the active one is interactive -->
+      <div class="grid min-h-[30rem] lg:min-h-[34rem]">
         @for (slide of heroSlides; track slide.title; let i = $index) {
           <div
-            class="absolute inset-0 transition-opacity duration-700 ease-out"
+            class="col-start-1 row-start-1 transition-opacity duration-700 ease-out"
             [class.opacity-100]="currentSlide() === i"
             [class.opacity-0]="currentSlide() !== i"
             [class.pointer-events-none]="currentSlide() !== i"

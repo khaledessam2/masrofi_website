@@ -1,4 +1,4 @@
-import { Component, signal, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal, computed, ChangeDetectionStrategy, afterNextRender } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { HeaderComponent } from '../../components/header/header';
 import { FooterComponent } from '../../components/footer/footer';
@@ -34,10 +34,24 @@ export class LearnComponent {
     { range: '16–19 years', topics: ['Financial planning and budgeting', 'Paying, borrowing and saving', 'Taking responsibility', 'Seeking financial advice', 'Choosing financial products', 'Protection from fraud and identity theft', 'Identifying and reducing financial risks', 'Links between work, life choices and planning'] },
   ];
 
-  // ---- age-group slider ----
+  // ---- age-group slider (1 card on mobile, 2 on tablet, 3 on desktop) ----
   slide = signal(0);
-  private perView = 3;
-  maxSlide = computed(() => Math.max(0, this.ageGroups.length - this.perView));
+  perView = signal(3);
+  maxSlide = computed(() => Math.max(0, this.ageGroups.length - this.perView()));
+  trackOffset = computed(() => this.slide() * (100 / this.perView()));
+
+  constructor() {
+    afterNextRender(() => {
+      const update = () => {
+        const w = window.innerWidth;
+        this.perView.set(w < 640 ? 1 : w < 1024 ? 2 : 3);
+        this.slide.update((v) => Math.min(v, this.maxSlide()));
+      };
+      update();
+      window.addEventListener('resize', update);
+    });
+  }
+
   next() { this.slide.update((v) => Math.min(v + 1, this.maxSlide())); }
   prev() { this.slide.update((v) => Math.max(v - 1, 0)); }
 

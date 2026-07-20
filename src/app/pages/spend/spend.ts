@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal, computed } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, computed, afterNextRender } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { HeaderComponent } from '../../components/header/header';
 import { FooterComponent } from '../../components/footer/footer';
@@ -39,15 +39,27 @@ export class SpendComponent {
     { color: 'red', name: 'Sunset' },
   ];
 
-  // ---- card slider (shows 3 at once, active centred) ----
+  // ---- card slider (1 card on mobile, 3 at once with active centred on ≥sm) ----
   slide = signal(0);
+  perView = signal(3);
 
-  // Offset (in units of one third of the viewport) that keeps the active
-  // card in the middle slot, clamped so the ends never show a blank slot.
+  constructor() {
+    afterNextRender(() => {
+      const update = () => this.perView.set(window.innerWidth < 640 ? 1 : 3);
+      update();
+      window.addEventListener('resize', update);
+    });
+  }
+
+  // Track offset as a percentage of the visible track. With 3-up we keep the
+  // active card in the middle slot (clamped so the ends never show a blank
+  // slot); with 1-up we simply step one full card at a time.
   trackOffset = computed(() => {
     const n = this.cardDesigns.length;
+    const pv = this.perView();
+    if (pv === 1) return this.slide() * 100;
     const centre = Math.min(Math.max(this.slide(), 1), n - 2);
-    return (centre - 1) * (100 / 3);
+    return (centre - 1) * (100 / pv);
   });
 
   next() { this.slide.update((v) => (v + 1) % this.cardDesigns.length); }
