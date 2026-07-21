@@ -152,14 +152,14 @@
     <!-- stat line -->
     <div class="container-x relative pb-14 text-center">
       <p class="mx-auto max-w-2xl text-2xl font-black sm:text-3xl">
-        Join over 2 million kids who have already built money skills with Masroofi
+        {{ copy.statLine }}
       </p>
-      <p class="mt-2 text-sm text-white/50">Based on all-time active child members since launch.</p>
+      <p class="mt-2 text-sm text-white/50">{{ copy.statCaption }}</p>
 
       <!-- trust ratings -->
       <div class="mt-8 flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
         <div class="flex flex-col items-center">
-          <span class="text-sm font-semibold text-white/70">Rated on the App Store</span>
+          <span class="text-sm font-semibold text-white/70">{{ copy.ratingAppStore }}</span>
           <div class="mt-1 flex gap-0.5">
             @for (s of [1, 2, 3, 4, 5]; track s) {
               <app-star [size]="18" color="var(--color-gold)" />
@@ -167,7 +167,7 @@
           </div>
         </div>
         <div class="flex flex-col items-center">
-          <span class="text-sm font-semibold text-white/70">Rated Excellent</span>
+          <span class="text-sm font-semibold text-white/70">{{ copy.ratingExcellent }}</span>
           <div class="mt-1 flex gap-0.5">
             @for (s of [1, 2, 3, 4, 5]; track s) {
               <app-star [size]="18" color="var(--color-green)" />
@@ -175,7 +175,7 @@
           </div>
         </div>
         <div class="flex flex-col items-center">
-          <span class="text-sm font-semibold text-white/70">Rated on Google Play</span>
+          <span class="text-sm font-semibold text-white/70">{{ copy.ratingGooglePlay }}</span>
           <div class="mt-1 flex gap-0.5">
             @for (s of [1, 2, 3, 4, 5]; track s) {
               <app-star [size]="18" color="var(--color-gold)" />
@@ -191,14 +191,13 @@
   <section id="missions" class="bg-sky/30 py-16 lg:py-24">
     <div class="container-x">
       <div reveal class="mx-auto max-w-2xl text-center">
-        <h2 class="text-4xl font-black lg:text-6xl">Invest in your child’s future</h2>
+        <h2 class="text-4xl font-black lg:text-6xl">{{ copy.calcHeading }}</h2>
         <p class="mx-auto mt-5 max-w-xl text-lg text-ink/70">
-          Grow a pot of money for when they turn 18 with a Masroofi junior investing account —
-          included on every plan.
+          {{ copy.calcBody }}
         </p>
         <a routerLink="/invest"
           class="mt-6 inline-block rounded-full bg-ink px-8 py-3.5 font-bold text-gold transition-transform hover:-translate-y-0.5">
-          Learn more
+          {{ copy.calcCta }}
         </a>
       </div>
 
@@ -206,19 +205,18 @@
         <!-- controls -->
         <div class="flex flex-col justify-center">
           <span class="w-fit rounded-full bg-gold px-3 py-1 text-xs font-bold text-ink">
-            Junior investing account
+            {{ copy.calcEyebrow }}
           </span>
           <p class="mt-4 text-lg text-ink/70">
-            <span class="font-black text-ink">{{ money(daily()) }} a day</span> invested could be
-            worth
+            <span class="font-black text-ink">{{ money(daily()) }} {{ copy.calcDaySuffix }}</span> {{ copy.calcWorthText }}
           </p>
           <p class="text-5xl font-black text-green lg:text-6xl">{{ money(projected()) }}</p>
-          <p class="text-sm text-ink/55">by the time they’re 18</p>
+          <p class="text-sm text-ink/55">{{ copy.calcByAge }}</p>
 
           <div class="mt-8 space-y-6">
             <div>
               <div class="flex justify-between text-sm font-semibold">
-                <span>Your child’s age</span><span>{{ childAge() }}</span>
+                <span>{{ copy.calcAgeLabel }}</span><span>{{ childAge() }}</span>
               </div>
               <input type="range" min="6" max="17" [value]="childAge()"
                 (input)="childAge.set(+$any($event.target).value)"
@@ -227,7 +225,7 @@
             </div>
             <div>
               <div class="flex justify-between text-sm font-semibold">
-                <span>Amount invested daily</span><span>{{ money(daily()) }}</span>
+                <span>{{ copy.calcDailyLabel }}</span><span>{{ money(daily()) }}</span>
               </div>
               <input type="range" min="1" max="25"
                 [value]="daily()" (input)="daily.set(+$any($event.target).value)"
@@ -242,11 +240,11 @@
           <div class="mb-4 flex gap-4 text-xs font-semibold">
             <span class="flex items-center gap-1.5">
               <span class="h-3 w-3 rounded-full bg-green/40"></span>
-              Returns
+              {{ copy.calcLegendReturns }}
             </span>
             <span class="flex items-center gap-1.5">
               <span class="h-3 w-3 rounded-full bg-ink"></span>
-              Your contributions
+              {{ copy.calcLegendContrib }}
             </span>
           </div>
           <div class="flex h-56 items-end gap-1.5">
@@ -263,13 +261,12 @@
             }
           </div>
           <div class="mt-2 flex justify-between text-xs text-ink/50">
-            <span>Today</span><span>Age 18</span>
+            <span>{{ copy.calcAxisToday }}</span><span>{{ copy.calcAxisAge18 }}</span>
           </div>
         </div>
       </div>
       <p class="mx-auto mt-6 max-w-3xl text-center text-xs text-ink/50">
-        Assumes a hypothetical 5% annual return. Projections are not a reliable indicator of future
-        results. Capital at risk — the value of investments can go down as well as up.
+        {{ copy.calcDisclaimer }}
       </p>
     </div>
   </section>
@@ -278,7 +275,7 @@
   <section class="bg-sky/30 pb-16 lg:pb-24">
     <div class="container-x">
       <h2 reveal class="text-center text-3xl font-black lg:text-5xl">
-        Why choose a Masroofi junior account?
+        {{ copy.whyHeading }}
       </h2>
       <div
         class="mx-auto mt-10 grid max-w-5xl gap-8 rounded-[2rem] bg-white p-8 sm:grid-cols-2 lg:grid-cols-4 lg:p-12"
@@ -378,7 +375,7 @@
         revealFrom="scale"
         class="mx-auto max-w-4xl text-4xl font-black leading-tight lg:text-7xl"
       >
-        Game-changing money learning, built for real life
+        {{ copy.bigStatement }}
       </h2>
     </div>
   </section>
@@ -392,18 +389,17 @@
         class="grid items-center gap-8 rounded-[2rem] bg-white p-8 lg:grid-cols-2 lg:p-12"
       >
         <div>
-          <h3 class="text-4xl font-black">Learn</h3>
+          <h3 class="text-4xl font-black">{{ copy.featLearnHeading }}</h3>
           <p class="mt-4 max-w-md text-lg text-ink/70">
-            Bite-sized lessons and real experiences teach kids lifelong money skills in a fun,
-            gamified way — earning points as they go.
+            {{ copy.featLearnBody }}
           </p>
           <a routerLink="/pricing" class="mt-5 inline-block font-bold text-green hover:underline"
-            >Learn more ›</a
+            >{{ copy.learnMore }}</a
           >
         </div>
         <div class="relative flex justify-center">
           <div class="relative w-64 rounded-[2rem] bg-ink p-6 text-center text-white">
-            <p class="text-lg font-bold">Why do people invest?</p>
+            <p class="text-lg font-bold">{{ copy.featLearnCardTitle }}</p>
             <div
               class="mx-auto mt-5 flex h-24 w-24 items-center justify-center rounded-2xl bg-green"
             >
@@ -411,11 +407,11 @@
             </div>
             <span
               class="absolute -right-3 -top-3 flex h-14 w-14 items-center justify-center rounded-full bg-gold text-lg font-black text-ink"
-              >100</span
+              >{{ copy.featLearnBadge100 }}</span
             >
             <span
               class="absolute -bottom-3 right-6 rounded-full bg-gold px-3 py-1 text-sm font-bold text-ink"
-              >60 XP</span
+              >{{ copy.featLearnBadgeXp }}</span
             >
           </div>
         </div>
@@ -424,34 +420,32 @@
       <!-- Save with interest + Invest -->
       <div class="grid gap-6 md:grid-cols-2">
         <div reveal revealFrom="left" class="rounded-[2rem] bg-white p-8 text-center lg:p-10">
-          <h3 class="text-3xl font-black">Save with interest</h3>
+          <h3 class="text-3xl font-black">{{ copy.featSaveHeading }}</h3>
           <p class="mx-auto mt-3 max-w-sm text-ink/70">
-            With custom savings goals and interest for Plus &amp; Max members, your kids’ money
-            grows with purpose.
+            {{ copy.featSaveBody }}
           </p>
           <a routerLink="/pricing" class="mt-4 inline-block font-bold text-green hover:underline"
-            >Learn more ›</a
+            >{{ copy.learnMore }}</a
           >
           <div class="mx-auto mt-6 w-48 rounded-[1.6rem] border-4 border-ink bg-sky/40 p-4">
             <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white">
               <span class="text-xl font-black text-green">%</span>
             </div>
-            <p class="mt-3 text-2xl font-black text-ink">Interest</p>
-            <p class="text-xs text-ink/60">on savings</p>
+            <p class="mt-3 text-2xl font-black text-ink">{{ copy.featSaveInterest }}</p>
+            <p class="text-xs text-ink/60">{{ copy.featSaveOnSavings }}</p>
           </div>
         </div>
         <div reveal revealFrom="right" class="rounded-[2rem] bg-white p-8 text-center lg:p-10">
-          <h3 class="text-3xl font-black">Invest</h3>
+          <h3 class="text-3xl font-black">{{ copy.featInvestHeading }}</h3>
           <p class="mx-auto mt-3 max-w-sm text-ink/70">
-            You’re not alone in wanting more for your kids — a junior investing account helps you
-            grow money for their future.
+            {{ copy.featInvestBody }}
           </p>
           <a routerLink="/pricing" class="mt-4 inline-block font-bold text-green hover:underline"
-            >Learn more ›</a
+            >{{ copy.learnMore }}</a
           >
           <div class="mx-auto mt-6 w-56 rounded-2xl bg-cream p-5 text-left">
-            <p class="text-sm font-semibold text-ink/60">Junior investing</p>
-            <p class="text-2xl font-black">£1,543.20</p>
+            <p class="text-sm font-semibold text-ink/60">{{ copy.featInvestCardLabel }}</p>
+            <p class="text-2xl font-black">{{ copy.featInvestCardStat }}</p>
             <svg viewBox="0 0 220 70" class="mt-2 w-full">
               <polyline
                 fill="none"
@@ -470,13 +464,12 @@
       <!-- Earn / Spend / Guide -->
       <div class="grid gap-6 lg:grid-cols-3">
         <div reveal class="rounded-[2rem] bg-white p-8 text-center">
-          <h3 class="text-3xl font-black">Earn</h3>
+          <h3 class="text-3xl font-black">{{ copy.featEarnHeading }}</h3>
           <p class="mx-auto mt-3 max-w-xs text-sm text-ink/70">
-            Through pocket money, gifts from family &amp; friends and completing chores, kids learn
-            to grow their own money.
+            {{ copy.featEarnBody }}
           </p>
           <a routerLink="/pricing" class="mt-4 inline-block font-bold text-green hover:underline"
-            >Learn more ›</a
+            >{{ copy.learnMore }}</a
           >
           <div class="mt-6 space-y-2.5 text-left">
             @for (t of earnTasks; track t.label) {
@@ -511,32 +504,31 @@
         </div>
 
         <div reveal [revealDelay]="120" class="rounded-[2rem] bg-white p-8 text-center">
-          <h3 class="text-3xl font-black">Spend</h3>
+          <h3 class="text-3xl font-black">{{ copy.featSpendHeading }}</h3>
           <p class="mx-auto mt-3 max-w-xs text-sm text-ink/70">
-            Set kids up for smarter spending with a personalised debit card and built-in spending
-            controls.
+            {{ copy.featSpendBody }}
           </p>
           <a routerLink="/pricing" class="mt-4 inline-block font-bold text-green hover:underline"
-            >Learn more ›</a
+            >{{ copy.learnMore }}</a
           >
           <div class="mx-auto mt-6 w-52">
             <app-card-visual color="green" />
             <div
               class="mt-3 flex items-center justify-between rounded-full bg-cream px-4 py-2 text-sm"
             >
-              <span class="font-semibold">Gaming World</span
-              ><span class="font-bold text-red">-£15</span>
+              <span class="font-semibold">{{ copy.featSpendLabel }}</span
+              ><span class="font-bold text-red">{{ copy.featSpendStat }}</span>
             </div>
           </div>
         </div>
 
         <div reveal [revealDelay]="240" class="rounded-[2rem] bg-white p-8 text-center">
-          <h3 class="text-3xl font-black">Guide</h3>
+          <h3 class="text-3xl font-black">{{ copy.featGuideHeading }}</h3>
           <p class="mx-auto mt-3 max-w-xs text-sm text-ink/70">
-            Parents set limits, track spending and stay in the loop — all with bank-grade security.
+            {{ copy.featGuideBody }}
           </p>
           <a routerLink="/pricing" class="mt-4 inline-block font-bold text-green hover:underline"
-            >Learn more ›</a
+            >{{ copy.learnMore }}</a
           >
           <div class="mt-6 space-y-3 rounded-2xl border-2 border-ink/10 p-5 text-left">
             @for (g of guideToggles; track g) {
@@ -555,7 +547,7 @@
         <a
           routerLink="/pricing"
           class="inline-block rounded-full bg-ink px-10 py-4 font-bold text-gold transition-transform hover:-translate-y-0.5"
-          >Get started</a
+          >{{ copy.featureCta }}</a
         >
       </div>
     </div>
@@ -565,7 +557,7 @@
   <section id="cards" class="bg-red py-16 text-white lg:py-24">
     <div class="container-x">
       <h2 reveal class="text-center text-4xl font-black lg:text-5xl">
-        For kids growing money smarts, it’s Masroofi
+        {{ copy.comparisonHeading }}
       </h2>
       <div
         reveal
@@ -580,7 +572,7 @@
             </div>
             <app-card-visual color="ink" />
           </div>
-          <p class="mt-3 text-center font-bold">Masroofi</p>
+          <p class="mt-3 text-center font-bold">{{ copy.comparisonMasroofi }}</p>
         </div>
 
         <!-- checklist -->
@@ -645,14 +637,13 @@
           <div
             class="flex aspect-[1.585/1] w-full items-end rounded-2xl bg-ink/40 p-5 text-white/70 shadow-xl ring-1 ring-white/10"
           >
-            <span class="text-sm font-bold">Kids’ bank accounts</span>
+            <span class="text-sm font-bold">{{ copy.comparisonBankLabel }}</span>
           </div>
-          <p class="mt-3 text-center font-bold">Other accounts</p>
+          <p class="mt-3 text-center font-bold">{{ copy.comparisonOther }}</p>
         </div>
       </div>
       <p class="mx-auto mt-10 max-w-2xl text-center text-sm text-white/70">
-        Many kids’ bank accounts offer a card and app with notifications and controls. The features
-        above are what make Masroofi uniquely different.
+        {{ copy.comparisonBody }}
       </p>
     </div>
   </section>
@@ -664,10 +655,9 @@
   <section id="pricing" class="bg-cream py-16 lg:py-24">
     <div class="container-x">
       <div reveal class="mx-auto max-w-2xl text-center">
-        <h2 class="text-4xl font-black lg:text-5xl">Plans &amp; pricing</h2>
+        <h2 class="text-4xl font-black lg:text-5xl">{{ copy.plansHeading }}</h2>
         <p class="mt-4 text-lg text-ink/70">
-          Choose from three Masroofi plans — all include the junior investing account. Try free for
-          30 days, cancel or switch plans anytime.
+          {{ copy.plansBody }}
         </p>
       </div>
 
@@ -689,7 +679,7 @@
                 >{{ plan.badge }}</span
               >
             </div>
-            <p class="mt-4 text-sm font-bold text-ink/60">Top benefits:</p>
+            <p class="mt-4 text-sm font-bold text-ink/60">{{ copy.topBenefits }}</p>
             <ul class="mt-3 flex-1 space-y-3">
               @for (b of plan.benefits; track b) {
                 <li class="flex items-start gap-2.5 text-sm">
@@ -721,10 +711,10 @@
         <a
           routerLink="/pricing"
           class="inline-block rounded-full bg-ink px-10 py-4 font-bold text-gold transition-transform hover:-translate-y-0.5"
-          >Compare prices</a
+          >{{ copy.comparePrices }}</a
         >
         <p class="mt-4 text-xs text-ink/50">
-          Interest rate is variable. Additional terms and conditions apply.
+          {{ copy.plansFineprint }}
         </p>
       </div>
     </div>
@@ -733,9 +723,9 @@
   <!-- ==================== NEWSLETTER ==================== -->
   <section class="bg-cream">
     <div reveal class="container-x py-16 text-center">
-      <h2 class="text-4xl font-black">Want to read more?</h2>
+      <h2 class="text-4xl font-black">{{ newsletter.heading }}</h2>
       <p class="mx-auto mt-3 max-w-lg text-ink/65">
-        Get a fresh slice of money news and the latest Masroofi updates, straight to your inbox.
+        {{ newsletter.body }}
       </p>
       <form
         class="mx-auto mt-8 flex max-w-3xl flex-col gap-3 sm:flex-row"
@@ -743,25 +733,25 @@
       >
         <input
           type="text"
-          placeholder="First name"
-          aria-label="First name"
+          [placeholder]="newsletter.firstName"
+          [attr.aria-label]="newsletter.firstName"
           class="flex-1 rounded-full border border-ink/15 bg-white px-6 py-4 text-ink outline-none focus:border-ink"
         />
         <input
           type="email"
-          placeholder="Email"
-          aria-label="Email"
+          [placeholder]="newsletter.email"
+          [attr.aria-label]="newsletter.email"
           class="flex-1 rounded-full border border-ink/15 bg-white px-6 py-4 text-ink outline-none focus:border-ink"
         />
         <button
           type="submit"
           class="rounded-full bg-ink px-8 py-4 font-bold text-gold transition-transform hover:-translate-y-0.5"
         >
-          Sign me up
+          {{ newsletter.button }}
         </button>
       </form>
       <p class="mt-3 text-xs text-ink/50">
-        Read our <a href="#" class="font-semibold underline">privacy policy</a>
+        {{ newsletter.fineprint }}
       </p>
     </div>
   </section>

@@ -1,5 +1,6 @@
-import { Component, signal, HostListener, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal, HostListener, ChangeDetectionStrategy, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ContentService } from '../../services/content.service';
 
 interface NavLink { label: string; path: string; fragment?: string; }
 
@@ -10,17 +11,18 @@ interface NavLink { label: string; path: string; fragment?: string; }
   templateUrl: './header.html',
 })
 export class HeaderComponent {
+  private content = inject(ContentService);
   scrolled = signal(false);
   menuOpen = signal(false);
 
-  links: NavLink[] = [
+  links: NavLink[] = this.content.block<NavLink[]>('global', 'nav_links', [
     { label: 'Plans & Pricing', path: '/pricing' },
     { label: 'Earn', path: '/earn' },
     { label: 'Spend', path: '/spend' },
     { label: 'Save', path: '/save' },
     { label: 'Invest', path: '/invest' },
     { label: 'Learn', path: '/learn' },
-  ];
+  ]);
 
   @HostListener('window:scroll')
   onScroll() {

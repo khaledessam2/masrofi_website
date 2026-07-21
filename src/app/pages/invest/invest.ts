@@ -1,5 +1,6 @@
-import { Component, signal, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal, computed, ChangeDetectionStrategy, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ContentService } from '../../services/content.service';
 import { HeaderComponent } from '../../components/header/header';
 import { FooterComponent } from '../../components/footer/footer';
 import { StarComponent } from '../../components/star/star';
@@ -29,10 +30,76 @@ interface Plan {
   templateUrl: './invest.html',
 })
 export class InvestComponent {
+  private content = inject(ContentService);
+
+  hero = this.content.block('invest', 'hero', {
+    title: 'Invest',
+    body: 'Grow a fund for your child’s future with a Masroofi Junior Stocks & Shares ISA.',
+    img: '/invest/Invest.png',
+    alt: 'Parent and child investing together',
+  });
+
+  newsletter = this.content.block('global', 'newsletter', {
+    heading: 'Stay in the know',
+    body: 'Get a fresh slice of money news, and the latest Masroofi updates, straight to your inbox.',
+    firstName: 'First name',
+    email: 'Email',
+    button: 'Sign me up',
+    fineprint: 'Read our privacy policy. Unsubscribe anytime.',
+  });
+
+  copy = this.content.block('invest', 'copy', {
+    goalLabel: '18th birthday goal',
+    goalCar: 'First car',
+    goalGap: 'Gap year',
+    goalUni: 'Uni costs',
+    isaCardLabel: 'Junior ISA',
+    isaCardStat: '£1,543.20',
+    includedBadge: 'Included in all Masroofi plans',
+    heroStatement: 'Money invested in a Junior ISA now could contribute to their dreams at 18',
+    calcEyebrow: 'Junior Stocks & Shares ISA',
+    calcDaySuffix: 'a day',
+    calcWorthText: 'invested could be worth',
+    calcByAge: 'by the time they’re 18',
+    calcAgeLabel: 'Your child’s age',
+    calcDailyLabel: 'Amount invested daily',
+    calcLegendReturns: 'Returns',
+    calcLegendContrib: 'Your contributions',
+    calcAxisToday: 'Today',
+    calcAxisAge18: 'Age 18',
+    calcDisclaimer: 'Assumes a hypothetical 5% average annual return. This figure is illustrative only and not a guaranteed outcome. Capital at risk. Junior ISA rules and terms and conditions apply.',
+    whyHeading: 'Why choose the Masroofi Junior ISA?',
+    easyHeading: 'Easy',
+    easyBody: 'Activate it in seconds using your parent app, then let the experts do the hard work for you — no finance degree needed.',
+    easyCta: 'Learn more ›',
+    easyMockTitle: 'Nadine’s Junior ISA',
+    easyMockStat: '£1,543.20',
+    easyMockChange: '▲ 11.8% all time',
+    easyMockContrib: '£1,380 total contributions',
+    easyMockButton: 'Add money',
+    easyMockRow1Label: 'Monthly contribution',
+    easyMockRow1Val: '£30.00',
+    easyMockRow2Label: 'From Aunt Vicky',
+    easyMockRow2Val: '+£50.00',
+    whyFineprint: 'Capital at risk. Past performance is not a guarantee of future results.',
+    howHeading: 'How does it work?',
+    testimonialQuote: 'I’ve set up a Junior ISA so he has a solid foundation in the future to build on his dreams.',
+    testimonialAuthor: 'Nicholas J. — verified member',
+    testimonialCaption: 'Rated excellent by families like yours',
+    faqHeading: 'Your questions, answered',
+    plansHeading: 'Plans & pricing',
+    plansBody: 'Choose from three Masroofi plans — all include the Junior Stocks & Shares ISA. Try free for 30 days, cancel or switch plans anytime.',
+    topBenefits: 'Top benefits:',
+    comparePrices: 'Compare prices',
+    plansFineprint: 'Interest rate is variable. Additional terms and conditions apply.',
+    readMoreSubtitle: 'Discover tips, tricks and investing insights on the Masroofi blog.',
+  });
+
   // ---- Investing calculator (shared logic with home) ----
-  childAge = signal(6);
-  daily = signal(4);
-  private rate = 0.05;
+  private calc = this.content.block('invest', 'calculator', { childAge: 6, daily: 4, rate: 0.05 });
+  childAge = signal(this.calc.childAge);
+  daily = signal(this.calc.daily);
+  private rate = this.calc.rate;
 
   private schedule = computed(() => {
     const years = Math.max(1, 18 - this.childAge());
@@ -64,28 +131,28 @@ export class InvestComponent {
   }
 
   // ---- 18th-birthday goal cards (hero) ----
-  goals = [
+  goals = this.content.block('invest', 'goals', [
     { icon: '🚗', label: 'First car' },
     { icon: '✈️', label: 'Gap year' },
     { icon: '🎓', label: 'Uni costs' },
-  ];
+  ]);
 
   // ---- Why choose ----
-  whyCards: WhyCard[] = [
+  whyCards: WhyCard[] = this.content.block<WhyCard[]>('invest', 'why_cards', [
     { icon: 'wallet', title: 'Affordable', body: 'No minimum monthly contributions. Start from just £1, then choose how much you contribute and when.' },
     { icon: 'chart', title: 'High performing', body: 'Our Junior ISA fund has delivered strong long-term average returns over the last 12 years.' },
     { icon: 'family', title: 'Family focused', body: 'Family and friends can add money to your child’s Junior ISA directly with Gift links.' },
     { icon: 'shield', title: 'Trustworthy', body: 'Your contributions are invested in a diversified equity fund and protected up to the regulated limit.' },
-  ];
+  ]);
 
-  howSteps: HowStep[] = [
+  howSteps: HowStep[] = this.content.block<HowStep[]>('invest', 'how_steps', [
     { icon: 'add', body: 'You, your family and friends add money to your child’s Junior ISA — up to £9,000 per tax year.' },
     { icon: 'percent', body: 'This money is invested by experts in a diversified stocks & shares fund.' },
     { icon: 'grow', body: 'Profits are reinvested back into the fund, helping the money grow faster — this is called compounding.' },
     { icon: 'lock', body: 'The Junior ISA is locked until your child turns 18, giving compounding time to work its magic.' },
-  ];
+  ]);
 
-  plans: Plan[] = [
+  plans: Plan[] = this.content.block<Plan[]>('invest', 'plans', [
     {
       name: 'Everyday', badge: 'Core features', accent: 'green', price: '£3.99', unit: 'monthly per child',
       benefits: ['Smart money app & debit card for kids', 'Pocket money & chore lists', 'Real-time alerts & parental controls', 'Junior Stocks & Shares ISA', 'Custom savings goals'],
@@ -98,15 +165,15 @@ export class InvestComponent {
       name: 'Max', badge: 'Family discount', accent: 'red', price: '£9.99', unit: 'monthly, up to four kids',
       benefits: ['All Plus benefits', 'Up to four kids’ accounts included', 'Lowest cost per child', 'Shared family savings goals', 'One simple family bill'],
     },
-  ];
+  ]);
 
-  blogCards: BlogCard[] = [
+  blogCards: BlogCard[] = this.content.block<BlogCard[]>('invest', 'blog_cards', [
     { tag: 'Investing', title: 'Junior ISAs, explained for parents', read: '3 min. read', accent: 'sky', img: '/blog/blog-1.png' },
     { tag: 'Guides', title: 'The power of pocket money', read: '2 min. read', accent: 'pink', img: '/blog/blog-2.png' },
     { tag: 'Growth', title: 'Compound interest, explained simply', read: '4 min. read', accent: 'gold', img: '/blog/blog-3.png' },
-  ];
+  ]);
 
-  faqs: FaqItem[] = [
+  faqs: FaqItem[] = this.content.block<FaqItem[]>('invest', 'faqs', [
     {
       q: 'How do I open a Junior ISA?',
       a: 'Activate the Junior Stocks & Shares ISA in seconds from your parent app — it’s included on every Masroofi plan. Once it’s open, you can start contributing whenever you like.',
@@ -127,7 +194,7 @@ export class InvestComponent {
       q: 'Are there any fees?',
       a: 'The Junior ISA is included in your monthly Masroofi plan — there are no separate account or contribution fees. Fund charges may apply within the investment itself.',
     },
-  ];
+  ]);
 
   accentVar(a: string): string { return `var(--color-${a})`; }
 }

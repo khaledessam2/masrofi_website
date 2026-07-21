@@ -3,6 +3,10 @@
     "allow": [
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4321/)",
       "Bash(curl -s http://localhost:4321/)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\khaled\\Desktop\\masrofi_admin\\src\\app\\pages\\login",
+      "C:\\Users\\khaled\\Desktop\\masrofi_admin\\src\\app\\pages\\dashboard"
     ]
   }
 }

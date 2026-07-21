@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ContentService } from '../../services/content.service';
 import { HeaderComponent } from '../../components/header/header';
 import { FooterComponent } from '../../components/footer/footer';
 import { StarComponent } from '../../components/star/star';
@@ -34,7 +35,51 @@ interface CompareRow { label: string; note?: string; masroofi: boolean | string;
   templateUrl: './pricing.html',
 })
 export class PricingComponent {
-  plans: Plan[] = [
+  private content = inject(ContentService);
+
+  hero = this.content.block('pricing', 'hero', {
+    title: 'Choose your ',
+    titleAccent: 'perfect plan',
+    body: 'Kids learn and grow their money while parents support and guide — all in one place.',
+  });
+
+  newsletter = this.content.block('global', 'newsletter', {
+    heading: 'Stay in the know',
+    body: 'Get a fresh slice of money news, and the latest Masroofi updates, straight to your inbox.',
+    firstName: 'First name',
+    email: 'Email',
+    button: 'Sign me up',
+    fineprint: 'Read our privacy policy. Unsubscribe anytime.',
+  });
+
+  copy = this.content.block('pricing', 'copy', {
+    plansHeading: 'Plans & pricing',
+    plansBody: 'Join over 2 million kids who have already built real money skills with Masroofi.',
+    plansFineprint: 'Based on all-time active child members since launch.',
+    planFreeNote: 'One month free',
+    planCta: 'Get started',
+    plansDisclaimer: 'Capital at risk. The value of your child’s investments can go down as well as up. Interest rates are variable and additional terms apply.',
+    plansEmphasis: 'One month FREE, cancel anytime.',
+    seeAllBenefits: 'See all benefits',
+    whyHeading: 'Why choose Masroofi?',
+    whyBody: 'Masroofi is the money app and debit card built by parents, for kids. From just £3.99 a month, children get a head start in life while parents get the tools to support and guide.',
+    whyCompareLead: 'See how Masroofi compares to other kids’ accounts:',
+    swipeHint: 'Swipe to compare →',
+    comparisonFineprint: 'Comparison based on publicly available information. Correct at time of writing.',
+    investHeading: 'Invest in your child’s future',
+    investBody: 'Grow a pot of money for when your child turns 18 with a Masroofi junior investing account. It’s included in every plan — just activate it in your parent app.',
+    investFineprint: 'Capital at risk. The value of your investment can go down as well as up.',
+    investCta: 'Discover investing',
+    investGoalLabel: '18th birthday goal',
+    investGoalUni: 'Uni fund',
+    investCardLabel: 'Junior investing',
+    investCardStat: '£1,543.20',
+    investGoalCar: 'First car',
+    faqHeadingLine1: 'Got questions?',
+    faqHeadingLine2: 'We have answers',
+  });
+
+  plans: Plan[] = this.content.block<Plan[]>('pricing', 'plans', [
     {
       key: 'e',
       name: 'Everyday',
@@ -63,9 +108,9 @@ export class PricingComponent {
       unit: 'monthly, up to four kids',
       desc: 'All Plus benefits, up to four kids’ accounts included — for one monthly fee.',
     },
-  ];
+  ]);
 
-  featureGroups: FeatureGroup[] = [
+  featureGroups: FeatureGroup[] = this.content.block<FeatureGroup[]>('pricing', 'feature_groups', [
     {
       title: 'Earn',
       rows: [
@@ -100,14 +145,14 @@ export class PricingComponent {
         { label: '80+ interactive Money Missions', e: false, p: true, m: true },
       ],
     },
-  ];
+  ]);
 
-  competitors = [
+  competitors = this.content.block<string[]>('pricing', 'competitors', [
     'NatWest Rooster Money', 'Revolut <18', 'Starling Kite', 'HyperJar',
     'Lloyds Smart Start', 'Nationwide FlexOne', 'Halifax Money Smart',
-  ];
+  ]);
 
-  compareRows: CompareRow[] = [
+  compareRows: CompareRow[] = this.content.block<CompareRow[]>('pricing', 'compare_rows', [
     { label: 'Parental controls', masroofi: true, others: [true, true, true, true, false, false, false] },
     { label: 'Gift links: money gifted by family & friends', masroofi: true, others: [true, true, true, true, false, false, false] },
     { label: 'Kids’ savings goals', masroofi: true, others: [true, true, true, true, false, true, false] },
@@ -121,9 +166,9 @@ export class PricingComponent {
     { label: 'Apple Pay (13+)', masroofi: true, others: [false, true, false, false, false, false, false] },
     { label: 'Custom cards', masroofi: true, others: [false, true, false, false, false, false, false] },
     { label: 'Age limits', masroofi: '6–18', others: ['6–17', '6–17', '6–16', '6–17', '11–15', '11–17', '11–17'] },
-  ];
+  ]);
 
-  faqs: FaqItem[] = [
+  faqs: FaqItem[] = this.content.block<FaqItem[]>('pricing', 'faqs', [
     { q: 'Can I change my plan after I sign up?', a: 'Yes. You can move between Everyday, Plus and the Max family plan anytime from your parent app. Changes take effect from your next billing date.' },
     { q: 'Can I cancel my membership?', a: 'Anytime, with no cancellation fees. If you cancel during your free trial you won’t be charged at all.' },
     { q: 'How is payment taken for my membership?', a: 'Your monthly membership is charged automatically to the debit or credit card you register when you sign up. You’ll always be reminded before the free trial ends.' },
@@ -132,7 +177,7 @@ export class PricingComponent {
     { q: 'How much does it cost to replace a lost or stolen card?', a: 'You can freeze a card instantly in the app. If you need a replacement, a standard replacement card is free — you’ll only pay if you choose a new personalised design.' },
     { q: 'What do I get during my free trial?', a: 'The full experience of the plan you choose — the card, both apps, spending controls and Money Missions — free for 30 days, with nothing charged until the trial ends.' },
     { q: 'Why does Masroofi charge a monthly fee?', a: 'The membership covers the card, the parent and kids apps, real-time controls and all the educational content — with no ads and no selling of your family’s data.' },
-  ];
+  ]);
 
   badgeVar(a: string): string { return `var(--color-${a})`; }
 }

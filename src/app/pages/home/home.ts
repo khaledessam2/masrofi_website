@@ -14,6 +14,7 @@ import { StarComponent } from '../../components/star/star';
 import { CardVisualComponent } from '../../components/card-visual/card-visual';
 import { TestimonialsComponent } from '../../components/testimonials/testimonials';
 import { RevealDirective } from '../../directives/reveal.directive';
+import { ContentService } from '../../services/content.service';
 
 @Component({
   selector: 'app-home',
@@ -30,8 +31,76 @@ import { RevealDirective } from '../../directives/reveal.directive';
   templateUrl: './home.html',
 })
 export class HomeComponent {
+  private content = inject(ContentService);
+
+  newsletter = this.content.block('global', 'newsletter', {
+    heading: 'Stay in the know',
+    body: 'Get a fresh slice of money news, and the latest Masroofi updates, straight to your inbox.',
+    firstName: 'First name',
+    email: 'Email',
+    button: 'Sign me up',
+    fineprint: 'Read our privacy policy. Unsubscribe anytime.',
+  });
+
+  copy = this.content.block('home', 'copy', {
+    statLine: 'Join over 2 million kids who have already built money skills with Masroofi',
+    statCaption: 'Based on all-time active child members since launch.',
+    ratingAppStore: 'Rated on the App Store',
+    ratingExcellent: 'Rated Excellent',
+    ratingGooglePlay: 'Rated on Google Play',
+    calcHeading: 'Invest in your child’s future',
+    calcBody: 'Grow a pot of money for when they turn 18 with a Masroofi junior investing account — included on every plan.',
+    calcCta: 'Learn more',
+    calcEyebrow: 'Junior investing account',
+    calcDaySuffix: 'a day',
+    calcWorthText: 'invested could be worth',
+    calcByAge: 'by the time they’re 18',
+    calcAgeLabel: 'Your child’s age',
+    calcDailyLabel: 'Amount invested daily',
+    calcLegendReturns: 'Returns',
+    calcLegendContrib: 'Your contributions',
+    calcAxisToday: 'Today',
+    calcAxisAge18: 'Age 18',
+    calcDisclaimer: 'Assumes a hypothetical 5% annual return. Projections are not a reliable indicator of future results. Capital at risk — the value of investments can go down as well as up.',
+    whyHeading: 'Why choose a Masroofi junior account?',
+    bigStatement: 'Game-changing money learning, built for real life',
+    learnMore: 'Learn more ›',
+    featLearnHeading: 'Learn',
+    featLearnBody: 'Bite-sized lessons and real experiences teach kids lifelong money skills in a fun, gamified way — earning points as they go.',
+    featLearnCardTitle: 'Why do people invest?',
+    featLearnBadge100: '100',
+    featLearnBadgeXp: '60 XP',
+    featSaveHeading: 'Save with interest',
+    featSaveBody: 'With custom savings goals and interest for Plus & Max members, your kids’ money grows with purpose.',
+    featSaveInterest: 'Interest',
+    featSaveOnSavings: 'on savings',
+    featInvestHeading: 'Invest',
+    featInvestBody: 'You’re not alone in wanting more for your kids — a junior investing account helps you grow money for their future.',
+    featInvestCardLabel: 'Junior investing',
+    featInvestCardStat: '£1,543.20',
+    featEarnHeading: 'Earn',
+    featEarnBody: 'Through pocket money, gifts from family & friends and completing chores, kids learn to grow their own money.',
+    featSpendHeading: 'Spend',
+    featSpendBody: 'Set kids up for smarter spending with a personalised debit card and built-in spending controls.',
+    featSpendLabel: 'Gaming World',
+    featSpendStat: '-£15',
+    featGuideHeading: 'Guide',
+    featGuideBody: 'Parents set limits, track spending and stay in the loop — all with bank-grade security.',
+    featureCta: 'Get started',
+    comparisonHeading: 'For kids growing money smarts, it’s Masroofi',
+    comparisonMasroofi: 'Masroofi',
+    comparisonBankLabel: 'Kids’ bank accounts',
+    comparisonOther: 'Other accounts',
+    comparisonBody: 'Many kids’ bank accounts offer a card and app with notifications and controls. The features above are what make Masroofi uniquely different.',
+    plansHeading: 'Plans & pricing',
+    plansBody: 'Choose from three Masroofi plans — all include the junior investing account. Try free for 30 days, cancel or switch plans anytime.',
+    topBenefits: 'Top benefits:',
+    comparePrices: 'Compare prices',
+    plansFineprint: 'Interest rate is variable. Additional terms and conditions apply.',
+  });
+
   // ---- Hero slider ----
-  heroSlides = [
+  heroSlides = this.content.block('home', 'hero_slides', [
     {
       img: '/hero/hero-1.svg',
       alt: 'Kid holding a Masroofi card and phone app',
@@ -68,7 +137,7 @@ export class HomeComponent {
       cta: 'Get started',
       note: 'Rated Excellent by parents.',
     },
-  ];
+  ]);
 
   currentSlide = signal(0);
   isPlaying = signal(true);
@@ -120,9 +189,10 @@ export class HomeComponent {
   }
 
   // ---- Investing calculator ----
-  childAge = signal(6);
-  daily = signal(4);
-  private rate = 0.05;
+  private calc = this.content.block('home', 'calculator', { childAge: 6, daily: 4, rate: 0.05 });
+  childAge = signal(this.calc.childAge);
+  daily = signal(this.calc.daily);
+  private rate = this.calc.rate;
 
   private schedule = computed(() => {
     const years = Math.max(1, 18 - this.childAge());
@@ -154,7 +224,7 @@ export class HomeComponent {
   }
 
   // ---- Why choose (4 pillars) ----
-  whyCards = [
+  whyCards = this.content.block('home', 'why_cards', [
     {
       icon: 'spark',
       title: 'Easy',
@@ -175,26 +245,26 @@ export class HomeComponent {
       title: 'Family focused',
       body: 'Family and friends can chip in directly with gift links, so everyone helps the pot grow.',
     },
-  ];
+  ]);
 
   // ---- Earn / Guide mini illustrations ----
-  earnTasks = [
+  earnTasks = this.content.block('home', 'earn_tasks', [
     { label: 'Make your bed', amount: '£0.50', done: true },
     { label: 'Weekly allowance', amount: '+£10', done: false },
     { label: 'Tidy your room', amount: '£0.50', done: true },
-  ];
-  guideToggles = ['High street', 'ATMs', 'Online'];
+  ]);
+  guideToggles = this.content.block('home', 'guide_toggles', ['High street', 'ATMs', 'Online']);
 
   // ---- Comparison ("money smarts") ----
-  comparisonRows = [
+  comparisonRows = this.content.block('home', 'comparison_rows', [
     { label: 'Eligible from age 6+', masroofi: true, banks: true },
     { label: 'Interest on savings', masroofi: true, banks: true },
     { label: 'Junior investing account', masroofi: true, banks: false },
     { label: '80+ educational money lessons', masroofi: true, banks: false },
-  ];
+  ]);
 
   // ---- Plans teaser ----
-  plans = [
+  plans = this.content.block('home', 'plans', [
     {
       name: 'Everyday',
       badge: 'Core features',
@@ -238,7 +308,7 @@ export class HomeComponent {
         'One simple family bill',
       ],
     },
-  ];
+  ]);
 
   accentVar(a: string): string {
     return `var(--color-${a})`;
